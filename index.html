@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio et CV de Lehomar2vinci — Développeur créatif passionné par le web, le mobile et le multimédia." />
+  <title>Lehomar2vinci — Portfolio &amp; CV</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <header class="site-header" id="site-header">
+    <nav class="nav container" aria-label="Navigation principale">
+      <a href="#hero" class="nav__logo">L<span class="accent">.</span></a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links" role="list">
+        <li><a href="#about"    class="nav__link">À propos</a></li>
+        <li><a href="#skills"   class="nav__link">Compétences</a></li>
+        <li><a href="#projects" class="nav__link">Projets</a></li>
+        <li><a href="#contact"  class="nav__link">Contact</a></li>
+        <li>
+          <a href="cv.pdf" class="btn btn--sm" download>
+            Télécharger CV
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ── Hero ── -->
+    <section class="hero section" id="hero" aria-label="Introduction">
+      <div class="container hero__inner">
+        <p class="hero__greeting">Bonjour, je suis</p>
+        <h1 class="hero__name">Lehomar<span class="accent">2vinci</span></h1>
+        <p class="hero__tagline">Développeur créatif — Web · Mobile · Multimédia</p>
+        <div class="hero__cta">
+          <a href="#projects" class="btn btn--primary">Voir mes projets</a>
+          <a href="#contact"  class="btn btn--outline">Me contacter</a>
+        </div>
+        <div class="hero__scroll-hint" aria-hidden="true">
+          <span class="scroll-dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── À propos ── -->
+    <section class="about section" id="about" aria-label="À propos">
+      <div class="container about__inner">
+        <div class="section-label">À propos</div>
+        <h2 class="section-title">Qui suis-je&nbsp;?</h2>
+        <div class="about__grid">
+          <div class="about__avatar" aria-hidden="true">
+            <div class="avatar-placeholder">L</div>
+          </div>
+          <div class="about__text">
+            <p>
+              Développeur passionné par la création d'expériences numériques originales, je travaille aussi bien sur des applications web interactives que sur des projets mobiles et multimédia.
+            </p>
+            <p>
+              Curieux et autodidacte, j'explore régulièrement de nouvelles technologies — de la visualisation sonore à la génération de contenu, en passant par le développement de jeux vidéo.
+            </p>
+            <p>
+              Mon objectif&nbsp;: allier créativité et rigueur technique pour concevoir des projets qui ont du sens.
+            </p>
+            <ul class="about__facts" role="list">
+              <li><span class="accent">→</span> Basé en France</li>
+              <li><span class="accent">→</span> Disponible pour des collaborations</li>
+              <li><span class="accent">→</span> Passionné par la musique &amp; le code</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Compétences ── -->
+    <section class="skills section" id="skills" aria-label="Compétences">
+      <div class="container">
+        <div class="section-label">Compétences</div>
+        <h2 class="section-title">Stack technique</h2>
+        <div class="skills__grid">
+
+          <div class="skill-card">
+            <div class="skill-card__icon">🌐</div>
+            <h3 class="skill-card__title">Web</h3>
+            <ul class="skill-card__list" role="list">
+              <li>HTML / CSS</li>
+              <li>JavaScript</li>
+              <li>PHP / Slim</li>
+              <li>Python (Flask)</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-card__icon">📱</div>
+            <h3 class="skill-card__title">Mobile</h3>
+            <ul class="skill-card__list" role="list">
+              <li>Dart / Flutter</li>
+              <li>C++ (Qt)</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-card__icon">🎮</div>
+            <h3 class="skill-card__title">Jeux &amp; 3D</h3>
+            <ul class="skill-card__list" role="list">
+              <li>Unity</li>
+              <li>C#</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-card__icon">🎵</div>
+            <h3 class="skill-card__title">Multimédia</h3>
+            <ul class="skill-card__list" role="list">
+              <li>Tidal Cycles</li>
+              <li>Web Audio API</li>
+              <li>OSC / MIDI</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-card__icon">🛠️</div>
+            <h3 class="skill-card__title">Outils</h3>
+            <ul class="skill-card__list" role="list">
+              <li>Git / GitHub</li>
+              <li>CMake</li>
+              <li>Linux</li>
+            </ul>
+          </div>
+
+          <div class="skill-card">
+            <div class="skill-card__icon">🐍</div>
+            <h3 class="skill-card__title">Scripting</h3>
+            <ul class="skill-card__list" role="list">
+              <li>Python</li>
+              <li>Bash</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Projets ── -->
+    <section class="projects section" id="projects" aria-label="Projets">
+      <div class="container">
+        <div class="section-label">Projets</div>
+        <h2 class="section-title">Ce que j'ai créé</h2>
+        <div class="projects__grid">
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">Python</span>
+              <a href="https://github.com/Lehomar2vinci/Truth-in-Pixels" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="Truth in Pixels sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">Truth in Pixels</h3>
+            <p class="project-card__desc">
+              Application satirique sur les abus algorithmiques de la vidéo et la vie privée.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>Python</li><li>Vie privée</li><li>Algorithme</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">JavaScript</span>
+              <a href="https://github.com/Lehomar2vinci/NovaTour" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="NovaTour sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">NovaTour</h3>
+            <p class="project-card__desc">
+              Application web Twitch intégrant une carte mondiale pour la communauté des voyageurs.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>JavaScript</li><li>Twitch API</li><li>Cartographie</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">JavaScript</span>
+              <a href="https://github.com/Lehomar2vinci/Tamegradient" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="Tamegradient sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">Tamegradient</h3>
+            <p class="project-card__desc">
+              Gradient web interactif avec presets de fonds et sons auto-générés en gammes musicales.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>JavaScript</li><li>Web Audio</li><li>Génératif</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">JavaScript</span>
+              <a href="https://github.com/Lehomar2vinci/PestOSC" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="PestOSC sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">PestOSC</h3>
+            <p class="project-card__desc">
+              Projet visuel autour de l'oscilloscope sonore — expérimentation arts &amp; code.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>JavaScript</li><li>OSC</li><li>Audio</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">Python</span>
+              <a href="https://github.com/Lehomar2vinci/Plumity-Share" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="Plumity Share sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">Plumity Share</h3>
+            <p class="project-card__desc">
+              Outil de partage et de collaboration facile, avec exclusion automatique des gros fichiers.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>Python</li><li>Collaboration</li><li>CLI</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-card__header">
+              <span class="project-tag">Dart</span>
+              <a href="https://github.com/Lehomar2vinci/museum" target="_blank" rel="noopener noreferrer" class="project-card__link" aria-label="Museum sur GitHub">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <h3 class="project-card__title">Museum</h3>
+            <p class="project-card__desc">
+              Application Flutter d'exercice sur la thématique des musées — navigation et découverte culturelle.
+            </p>
+            <ul class="project-card__tags" role="list">
+              <li>Dart</li><li>Flutter</li><li>Mobile</li>
+            </ul>
+          </article>
+
+        </div>
+
+        <div class="projects__more">
+          <a href="https://github.com/Lehomar2vinci" target="_blank" rel="noopener noreferrer" class="btn btn--outline">
+            Voir tous les projets sur GitHub →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Contact ── -->
+    <section class="contact section" id="contact" aria-label="Contact">
+      <div class="container contact__inner">
+        <div class="section-label">Contact</div>
+        <h2 class="section-title">Travaillons ensemble</h2>
+        <p class="contact__intro">
+          Vous avez un projet, une idée ou envie d'échanger&nbsp;? N'hésitez pas à me contacter.
+        </p>
+        <div class="contact__links">
+          <a href="https://github.com/Lehomar2vinci" target="_blank" rel="noopener noreferrer" class="contact__item">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Lehomar2vinci — Fait avec ❤️ &amp; du code</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
