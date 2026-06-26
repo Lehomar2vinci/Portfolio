@@ -4,23 +4,31 @@
   const { cases, mixTexts, palettes, tourSteps, uiText } = window.PortfolioData;
   const { copyToClipboard, preference } = window.PortfolioUtils;
 
-const menuButton = document.querySelector(".menu-button");
-const mobileNav = document.querySelector(".mobile-nav");
+  const menuButton = document.querySelector(".menu-button");
+  const mobileNav = document.querySelector(".mobile-nav");
   menuButton?.addEventListener("click", () => {
     const open = mobileNav.classList.toggle("open");
     menuButton.setAttribute("aria-expanded", String(open));
   });
-  mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
-    mobileNav.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-  }));
+  mobileNav?.querySelectorAll("a").forEach((link) =>
+    link.addEventListener("click", () => {
+      mobileNav.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }),
+  );
 
   const translatable = [...document.querySelectorAll("[data-en]")];
-  translatable.forEach((element) => { element.dataset.fr = element.innerHTML; });
+  translatable.forEach((element) => {
+    element.dataset.fr = element.innerHTML;
+  });
   const labelled = [...document.querySelectorAll("[data-label-en]")];
-  labelled.forEach((element) => { element.dataset.labelFr = element.getAttribute("aria-label"); });
+  labelled.forEach((element) => {
+    element.dataset.labelFr = element.getAttribute("aria-label");
+  });
   const placeholders = [...document.querySelectorAll("[data-placeholder-en]")];
-  placeholders.forEach((element) => { element.dataset.placeholderFr = element.getAttribute("placeholder"); });
+  placeholders.forEach((element) => {
+    element.dataset.placeholderFr = element.getAttribute("placeholder");
+  });
   const languageButton = document.querySelector("#lang-toggle");
   const paletteButton = document.querySelector("#palette-toggle");
   const contrastButton = document.querySelector("#contrast-toggle");
@@ -32,22 +40,40 @@ const mobileNav = document.querySelector(".mobile-nav");
     currentLang = language === "en" ? "en" : "fr";
     document.documentElement.lang = currentLang;
     translatable.forEach((element) => {
-      element.innerHTML = currentLang === "en" ? element.dataset.en : element.dataset.fr;
+      element.innerHTML =
+        currentLang === "en" ? element.dataset.en : element.dataset.fr;
     });
     labelled.forEach((element) => {
-      element.setAttribute("aria-label", currentLang === "en" ? element.dataset.labelEn : element.dataset.labelFr);
+      element.setAttribute(
+        "aria-label",
+        currentLang === "en"
+          ? element.dataset.labelEn
+          : element.dataset.labelFr,
+      );
     });
     placeholders.forEach((element) => {
-      element.setAttribute("placeholder", currentLang === "en" ? element.dataset.placeholderEn : element.dataset.placeholderFr);
+      element.setAttribute(
+        "placeholder",
+        currentLang === "en"
+          ? element.dataset.placeholderEn
+          : element.dataset.placeholderFr,
+      );
     });
     languageButton.textContent = currentLang === "en" ? "FR" : "EN";
-    languageButton.setAttribute("aria-label", currentLang === "en" ? "Afficher le site en français" : "Display the site in English");
-    document.title = currentLang === "en"
-      ? "Nathan Chambrette — Code, sound & interactions"
-      : "Nathan Chambrette — Code, son & interactions";
-    document.querySelector('meta[name="description"]').content = currentLang === "en"
-      ? "Nathan Chambrette creates interactive experiences at the crossroads of code and sound."
-      : "Nathan Chambrette conçoit des expériences interactives à la croisée du code et du son.";
+    languageButton.setAttribute(
+      "aria-label",
+      currentLang === "en"
+        ? "Afficher le site en français"
+        : "Display the site in English",
+    );
+    document.title =
+      currentLang === "en"
+        ? "Nathan Chambrette — Code, sound & interactions"
+        : "Nathan Chambrette — Code, son & interactions";
+    document.querySelector('meta[name="description"]').content =
+      currentLang === "en"
+        ? "Nathan Chambrette creates interactive experiences at the crossroads of code and sound."
+        : "Nathan Chambrette conçoit des expériences interactives à la croisée du code et du son.";
     const playControl = document.querySelector("#play");
     if (playControl?.getAttribute("aria-pressed") === "true") {
       playControl.innerHTML = `<span aria-hidden="true">■</span> ${uiText[currentLang].stop}`;
@@ -68,9 +94,11 @@ const mobileNav = document.querySelector(".mobile-nav");
   function applyPalette(key) {
     const palette = palettes.find((item) => item.key === key) || palettes[0];
     palettes.forEach((item) => {
-      if (item.className) document.documentElement.classList.remove(item.className);
+      if (item.className)
+        document.documentElement.classList.remove(item.className);
     });
-    if (palette.className) document.documentElement.classList.add(palette.className);
+    if (palette.className)
+      document.documentElement.classList.add(palette.className);
     if (paletteButton) paletteButton.textContent = palette.label;
     preference.set("portfolio-palette", palette.key);
     refreshPreferenceLabels();
@@ -79,19 +107,39 @@ const mobileNav = document.querySelector(".mobile-nav");
   function refreshPreferenceLabels() {
     const contrastOn = contrastButton?.getAttribute("aria-pressed") === "true";
     const motionOn = motionButton?.getAttribute("aria-pressed") === "true";
-    if (paletteButton) paletteButton.setAttribute("aria-label", `${uiText[currentLang].palette}: ${paletteButton.textContent}`);
-    if (contrastButton) contrastButton.setAttribute("aria-label", currentLang === "en"
-      ? `${contrastOn ? "Disable" : "Enable"} enhanced contrast`
-      : `${contrastOn ? "Désactiver" : "Activer"} le contraste renforcé`);
-    if (motionButton) motionButton.setAttribute("aria-label", currentLang === "en"
-      ? `${motionOn ? "Restore" : "Reduce"} motion`
-      : `${motionOn ? "Rétablir" : "Réduire"} les animations`);
+    if (paletteButton)
+      paletteButton.setAttribute(
+        "aria-label",
+        `${uiText[currentLang].palette}: ${paletteButton.textContent}`,
+      );
+    if (contrastButton)
+      contrastButton.setAttribute(
+        "aria-label",
+        currentLang === "en"
+          ? `${contrastOn ? "Disable" : "Enable"} enhanced contrast`
+          : `${contrastOn ? "Désactiver" : "Activer"} le contraste renforcé`,
+      );
+    if (motionButton)
+      motionButton.setAttribute(
+        "aria-label",
+        currentLang === "en"
+          ? `${motionOn ? "Restore" : "Reduce"} motion`
+          : `${motionOn ? "Rétablir" : "Réduire"} les animations`,
+      );
   }
 
-  languageButton?.addEventListener("click", () => applyLanguage(currentLang === "fr" ? "en" : "fr"));
+  languageButton?.addEventListener("click", () =>
+    applyLanguage(currentLang === "fr" ? "en" : "fr"),
+  );
   paletteButton?.addEventListener("click", () => {
-    const activeKey = palettes.find((item) => item.label === paletteButton.textContent)?.key || palettes[0].key;
-    const next = palettes[(palettes.findIndex((item) => item.key === activeKey) + 1) % palettes.length];
+    const activeKey =
+      palettes.find((item) => item.label === paletteButton.textContent)?.key ||
+      palettes[0].key;
+    const next =
+      palettes[
+        (palettes.findIndex((item) => item.key === activeKey) + 1) %
+          palettes.length
+      ];
     applyPalette(next.key);
   });
   contrastButton?.addEventListener("click", () => {
@@ -104,30 +152,47 @@ const mobileNav = document.querySelector(".mobile-nav");
     if (enabled) stop();
   });
   applyPalette(preference.get("portfolio-palette", "signal"));
-  applyToggle(contrastButton, "high-contrast", "portfolio-contrast", preference.get("portfolio-contrast", "false") === "true");
-  applyToggle(motionButton, "reduce-motion", "portfolio-motion", preference.get("portfolio-motion", "false") === "true");
+  applyToggle(
+    contrastButton,
+    "high-contrast",
+    "portfolio-contrast",
+    preference.get("portfolio-contrast", "false") === "true",
+  );
+  applyToggle(
+    motionButton,
+    "reduce-motion",
+    "portfolio-motion",
+    preference.get("portfolio-motion", "false") === "true",
+  );
   applyLanguage(currentLang);
 
   const progress = document.querySelector(".reading-progress span");
   function updateProgress() {
-    const available = document.documentElement.scrollHeight - window.innerHeight;
+    const available =
+      document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = `${available > 0 ? (window.scrollY / available) * 100 : 0}%`;
   }
   window.addEventListener("scroll", updateProgress, { passive: true });
   updateProgress();
 
   const navLinks = [...document.querySelectorAll(".desktop-nav a")];
-  const navTargets = navLinks.map((link) => document.querySelector(link.getAttribute("href"))).filter(Boolean);
+  const navTargets = navLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
   if ("IntersectionObserver" in window) {
-    const navObserver = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      navLinks.forEach((link) => {
-        const active = link.getAttribute("href") === `#${entry.target.id}`;
-        link.classList.toggle("active", active);
-        if (active) link.setAttribute("aria-current", "location");
-        else link.removeAttribute("aria-current");
-      });
-    }), { rootMargin: "-35% 0px -60%" });
+    const navObserver = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((link) => {
+            const active = link.getAttribute("href") === `#${entry.target.id}`;
+            link.classList.toggle("active", active);
+            if (active) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+        }),
+      { rootMargin: "-35% 0px -60%" },
+    );
     navTargets.forEach((target) => navObserver.observe(target));
   }
 
@@ -135,7 +200,9 @@ const mobileNav = document.querySelector(".mobile-nav");
   const commandTrigger = document.querySelector("#command-trigger");
   const commandInput = document.querySelector("#command-input");
   const commandClose = document.querySelector(".command-close");
-  const commandItems = [...document.querySelectorAll(".command-list > [role='option']")];
+  const commandItems = [
+    ...document.querySelectorAll(".command-list > [role='option']"),
+  ];
   let commandReturnFocus = null;
   let commandIndex = 0;
 
@@ -153,14 +220,19 @@ const mobileNav = document.querySelector(".mobile-nav");
     });
     visible[commandIndex].classList.add("selected");
     visible[commandIndex].setAttribute("aria-selected", "true");
-    commandInput.setAttribute("aria-activedescendant", visible[commandIndex].id);
+    commandInput.setAttribute(
+      "aria-activedescendant",
+      visible[commandIndex].id,
+    );
     visible[commandIndex].scrollIntoView({ block: "nearest" });
   }
 
   function filterCommands() {
     const query = commandInput.value.trim().toLocaleLowerCase(currentLang);
     commandItems.forEach((item) => {
-      item.hidden = Boolean(query) && !item.textContent.toLocaleLowerCase(currentLang).includes(query);
+      item.hidden =
+        Boolean(query) &&
+        !item.textContent.toLocaleLowerCase(currentLang).includes(query);
     });
     commandIndex = 0;
     selectCommand(0);
@@ -169,7 +241,9 @@ const mobileNav = document.querySelector(".mobile-nav");
   function openCommands(trigger = document.activeElement) {
     commandReturnFocus = trigger;
     commandInput.value = "";
-    commandItems.forEach((item) => { item.hidden = false; });
+    commandItems.forEach((item) => {
+      item.hidden = false;
+    });
     commandDialog.showModal();
     commandInput.setAttribute("aria-expanded", "true");
     selectCommand(0);
@@ -180,8 +254,14 @@ const mobileNav = document.querySelector(".mobile-nav");
   commandClose?.addEventListener("click", () => commandDialog.close());
   commandInput?.addEventListener("input", filterCommands);
   commandInput?.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowDown") { event.preventDefault(); selectCommand(commandIndex + 1); }
-    if (event.key === "ArrowUp") { event.preventDefault(); selectCommand(commandIndex - 1); }
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      selectCommand(commandIndex + 1);
+    }
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      selectCommand(commandIndex - 1);
+    }
     if (event.key === "Enter") {
       event.preventDefault();
       visibleCommands()[commandIndex]?.click();
@@ -194,15 +274,26 @@ const mobileNav = document.querySelector(".mobile-nav");
       else openCommands();
     }
   });
-  commandItems.forEach((item) => item.addEventListener("click", () => {
-    const target = item.dataset.target;
-    commandDialog.close();
-    if (item.dataset.command === "tour") {
-      openTour();
-      return;
-    }
-    if (target) document.querySelector(target)?.scrollIntoView({ behavior: document.documentElement.classList.contains("reduce-motion") ? "auto" : "smooth" });
-  }));
+  commandItems.forEach((item) =>
+    item.addEventListener("click", () => {
+      const target = item.dataset.target;
+      commandDialog.close();
+      if (item.dataset.command === "tour") {
+        openTour();
+        return;
+      }
+      if (target)
+        document
+          .querySelector(target)
+          ?.scrollIntoView({
+            behavior: document.documentElement.classList.contains(
+              "reduce-motion",
+            )
+              ? "auto"
+              : "smooth",
+          });
+    }),
+  );
   commandDialog?.addEventListener("click", (event) => {
     if (event.target === commandDialog) commandDialog.close();
   });
@@ -214,9 +305,13 @@ const mobileNav = document.querySelector(".mobile-nav");
 
   const reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    }), { threshold: .12 });
+    const observer = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        }),
+      { threshold: 0.12 },
+    );
     reveals.forEach((element) => observer.observe(element));
   } else {
     reveals.forEach((element) => element.classList.add("visible"));
@@ -246,12 +341,12 @@ const mobileNav = document.querySelector(".mobile-nav");
     const gain = ctx.createGain();
     oscillator.type = waveform?.value || "triangle";
     oscillator.frequency.value = Number(pad.dataset.note);
-    gain.gain.setValueAtTime(.0001, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.22, ctx.currentTime + .015);
-    gain.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + .24);
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.24);
     oscillator.connect(gain).connect(ctx.destination);
     oscillator.start();
-    oscillator.stop(ctx.currentTime + .26);
+    oscillator.stop(ctx.currentTime + 0.26);
     pad.classList.add("active");
     setTimeout(() => pad.classList.remove("active"), 150);
     screenLabel.textContent = `${pad.dataset.key} · ${pad.querySelector("span").textContent}`;
@@ -273,7 +368,8 @@ const mobileNav = document.querySelector(".mobile-nav");
 
   function play() {
     if (timer) return stop();
-    if (!sequence.length) sequence = pads.filter((_, index) => [0, 2, 4, 7].includes(index));
+    if (!sequence.length)
+      sequence = pads.filter((_, index) => [0, 2, 4, 7].includes(index));
     const beat = () => {
       tone(sequence[step % sequence.length], false);
       step += 1;
@@ -287,17 +383,25 @@ const mobileNav = document.querySelector(".mobile-nav");
 
   pads.forEach((pad) => pad.addEventListener("click", () => tone(pad)));
   document.addEventListener("keydown", (event) => {
-    if (event.repeat || /INPUT|BUTTON|A/.test(document.activeElement.tagName)) return;
-    const pad = pads.find((item) => item.dataset.key === event.key.toUpperCase());
+    if (event.repeat || /INPUT|BUTTON|A/.test(document.activeElement.tagName))
+      return;
+    const pad = pads.find(
+      (item) => item.dataset.key === event.key.toUpperCase(),
+    );
     if (pad) tone(pad);
   });
   playButton?.addEventListener("click", play);
   clearButton?.addEventListener("click", () => {
-    stop(); sequence = []; screenLabel.textContent = uiText[currentLang].cleared;
+    stop();
+    sequence = [];
+    screenLabel.textContent = uiText[currentLang].cleared;
   });
   tempo?.addEventListener("input", () => {
     bpmLabel.textContent = `${tempo.value} BPM`;
-    if (timer) { stop(); play(); }
+    if (timer) {
+      stop();
+      play();
+    }
   });
 
   const filterButtons = [...document.querySelectorAll("[data-filter]")];
@@ -307,26 +411,44 @@ const mobileNav = document.querySelector(".mobile-nav");
   function filterProjects(filter = "all") {
     let visible = 0;
     projectCards.forEach((project) => {
-      const show = filter === "all" || project.dataset.projectTags.split(" ").includes(filter);
+      const show =
+        filter === "all" ||
+        project.dataset.projectTags.split(" ").includes(filter);
       project.classList.toggle("filtered-out", !show);
       if (show) visible += 1;
     });
-    filterButtons.forEach((button) => button.classList.toggle("active", button.dataset.filter === filter));
+    filterButtons.forEach((button) =>
+      button.classList.toggle("active", button.dataset.filter === filter),
+    );
     if (projectCount) {
-      projectCount.textContent = visible === 1 ? uiText[currentLang].projectShown : `${visible} ${uiText[currentLang].projectsShown}`;
+      projectCount.textContent =
+        visible === 1
+          ? uiText[currentLang].projectShown
+          : `${visible} ${uiText[currentLang].projectsShown}`;
     }
   }
 
-  filterButtons.forEach((button) => button.addEventListener("click", () => filterProjects(button.dataset.filter)));
+  filterButtons.forEach((button) =>
+    button.addEventListener("click", () =>
+      filterProjects(button.dataset.filter),
+    ),
+  );
   languageHooks.push(() => {
-    const activeFilter = filterButtons.find((button) => button.classList.contains("active"))?.dataset.filter || "all";
+    const activeFilter =
+      filterButtons.find((button) => button.classList.contains("active"))
+        ?.dataset.filter || "all";
     filterProjects(activeFilter);
   });
   filterProjects("all");
 
   const skillRanges = [...document.querySelectorAll(".skill-range")];
   const mixBars = [...document.querySelectorAll(".mix-bars i")];
-  const skillValueLabels = Object.fromEntries([...document.querySelectorAll("[data-skill-value]")].map((item) => [item.dataset.skillValue, item]));
+  const skillValueLabels = Object.fromEntries(
+    [...document.querySelectorAll("[data-skill-value]")].map((item) => [
+      item.dataset.skillValue,
+      item,
+    ]),
+  );
   const mixHeadline = document.querySelector("#mix-headline");
   const mixDescription = document.querySelector("#mix-description");
   const mixDominant = document.querySelector("#mix-dominant");
@@ -347,27 +469,39 @@ const mobileNav = document.querySelector(".mobile-nav");
       const value = Number(values[range.dataset.skill] ?? range.value);
       range.value = value;
       range.setAttribute("aria-valuetext", `${value}%`);
-      if (skillValueLabels[range.dataset.skill]) skillValueLabels[range.dataset.skill].textContent = `${value}%`;
+      if (skillValueLabels[range.dataset.skill])
+        skillValueLabels[range.dataset.skill].textContent = `${value}%`;
       if (mixBars[index]) mixBars[index].style.setProperty("--h", `${value}%`);
     });
   }
 
   function updateSkillMix(save = true) {
-    const values = Object.fromEntries(skillRanges.map((range) => [range.dataset.skill, Number(range.value)]));
+    const values = Object.fromEntries(
+      skillRanges.map((range) => [range.dataset.skill, Number(range.value)]),
+    );
     const entries = Object.entries(values).sort((a, b) => b[1] - a[1]);
-    const dominant = entries[0][1] - entries[entries.length - 1][1] < 16 ? "balanced" : entries[0][0];
-    const average = Math.round(Object.values(values).reduce((total, value) => total + value, 0) / Object.values(values).length);
+    const dominant =
+      entries[0][1] - entries[entries.length - 1][1] < 16
+        ? "balanced"
+        : entries[0][0];
+    const average = Math.round(
+      Object.values(values).reduce((total, value) => total + value, 0) /
+        Object.values(values).length,
+    );
     const [headline, description] = mixTexts[currentLang][dominant];
     mixHeadline.textContent = headline;
     mixDescription.textContent = description;
-    mixDominant.textContent = dominant === "balanced" ? headline : entries[0][0].toUpperCase();
+    mixDominant.textContent =
+      dominant === "balanced" ? headline : entries[0][0].toUpperCase();
     mixAverage.textContent = `${average}%`;
     setMix(values);
     if (save) preference.set("portfolio-skill-mix", JSON.stringify(values));
   }
 
   setMix(storedMix());
-  skillRanges.forEach((range) => range.addEventListener("input", () => updateSkillMix()));
+  skillRanges.forEach((range) =>
+    range.addEventListener("input", () => updateSkillMix()),
+  );
   mixReset?.addEventListener("click", () => {
     setMix(mixDefaults);
     updateSkillMix();
@@ -383,11 +517,15 @@ const mobileNav = document.querySelector(".mobile-nav");
   let currentBrief = "";
 
   function activeBriefChoice(group) {
-    return document.querySelector(`[data-brief-group="${group}"] .choice.active`);
+    return document.querySelector(
+      `[data-brief-group="${group}"] .choice.active`,
+    );
   }
 
   function briefPhrase(choice) {
-    return currentLang === "en" ? choice.dataset.briefEn : choice.dataset.briefFr;
+    return currentLang === "en"
+      ? choice.dataset.briefEn
+      : choice.dataset.briefFr;
   }
 
   function updateBrief() {
@@ -395,21 +533,31 @@ const mobileNav = document.querySelector(".mobile-nav");
     const format = activeBriefChoice("format");
     const constraint = activeBriefChoice("constraint");
     if (!goal || !format || !constraint) return;
-    const score = Math.min(99, Number(goal.dataset.score) + Number(format.dataset.score) + Number(constraint.dataset.score));
-    currentBrief = currentLang === "en"
-      ? `I can help you ${briefPhrase(goal)} ${briefPhrase(format)}, ${briefPhrase(constraint)}.`
-      : `Je peux vous aider à ${briefPhrase(goal)} ${briefPhrase(format)}, ${briefPhrase(constraint)}.`;
+    const score = Math.min(
+      99,
+      Number(goal.dataset.score) +
+        Number(format.dataset.score) +
+        Number(constraint.dataset.score),
+    );
+    currentBrief =
+      currentLang === "en"
+        ? `I can help you ${briefPhrase(goal)} ${briefPhrase(format)}, ${briefPhrase(constraint)}.`
+        : `Je peux vous aider à ${briefPhrase(goal)} ${briefPhrase(format)}, ${briefPhrase(constraint)}.`;
     briefResult.textContent = currentBrief;
     briefScore.textContent = `${score}%`;
     briefMeter.style.width = `${score}%`;
   }
 
-  briefChoices.forEach((choice) => choice.addEventListener("click", () => {
-    const group = choice.closest("[data-brief-group]");
-    group.querySelectorAll(".choice").forEach((item) => item.classList.remove("active"));
-    choice.classList.add("active");
-    updateBrief();
-  }));
+  briefChoices.forEach((choice) =>
+    choice.addEventListener("click", () => {
+      const group = choice.closest("[data-brief-group]");
+      group
+        .querySelectorAll(".choice")
+        .forEach((item) => item.classList.remove("active"));
+      choice.classList.add("active");
+      updateBrief();
+    }),
+  );
   languageHooks.push(updateBrief);
   updateBrief();
 
@@ -446,8 +594,22 @@ const mobileNav = document.querySelector(".mobile-nav");
     tourTitle.textContent = data[0];
     tourText.textContent = data[1];
     tourPrev.disabled = tourIndex === 0;
-    tourNext.textContent = tourIndex === tourSteps.length - 1 ? (currentLang === "en" ? "Finish" : "Terminer") : (currentLang === "en" ? "Next" : "Suivant");
-    document.querySelector(step.target)?.scrollIntoView({ behavior: document.documentElement.classList.contains("reduce-motion") ? "auto" : "smooth", block: "start" });
+    tourNext.textContent =
+      tourIndex === tourSteps.length - 1
+        ? currentLang === "en"
+          ? "Finish"
+          : "Terminer"
+        : currentLang === "en"
+          ? "Next"
+          : "Suivant";
+    document
+      .querySelector(step.target)
+      ?.scrollIntoView({
+        behavior: document.documentElement.classList.contains("reduce-motion")
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
   }
 
   function openTour() {
@@ -486,12 +648,13 @@ const mobileNav = document.querySelector(".mobile-nav");
   if (window.matchMedia("(pointer: fine)").matches) {
     document.querySelectorAll("[data-tilt]").forEach((element) => {
       element.addEventListener("pointermove", (event) => {
-        if (document.documentElement.classList.contains("reduce-motion")) return;
+        if (document.documentElement.classList.contains("reduce-motion"))
+          return;
         const rect = element.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
-        element.style.setProperty("--tilt-x", `${(x - .5) * 5}deg`);
-        element.style.setProperty("--tilt-y", `${(.5 - y) * 5}deg`);
+        element.style.setProperty("--tilt-x", `${(x - 0.5) * 5}deg`);
+        element.style.setProperty("--tilt-y", `${(0.5 - y) * 5}deg`);
         element.style.setProperty("--glow-x", `${x * 100}%`);
         element.style.setProperty("--glow-y", `${y * 100}%`);
       });
@@ -511,7 +674,7 @@ const mobileNav = document.querySelector(".mobile-nav");
     lead: document.querySelector("#case-lead"),
     gesture: document.querySelector("#case-gesture"),
     system: document.querySelector("#case-system"),
-    explore: document.querySelector("#case-explore")
+    explore: document.querySelector("#case-explore"),
   };
   const caseLink = document.querySelector("#case-link");
   let caseTrigger;
@@ -520,18 +683,24 @@ const mobileNav = document.querySelector(".mobile-nav");
     const entry = cases[key];
     if (!entry) return;
     const data = entry[currentLang];
-    Object.entries(caseFields).forEach(([field, element]) => { element.textContent = data[field]; });
+    Object.entries(caseFields).forEach(([field, element]) => {
+      element.textContent = data[field];
+    });
     caseLink.href = entry.link;
   }
 
-  document.querySelectorAll("[data-case]").forEach((button) => button.addEventListener("click", () => {
-    if (!cases[button.dataset.case]) return;
-    caseTrigger = button;
-    activeCaseKey = button.dataset.case;
-    renderCase(activeCaseKey);
-    dialog.showModal();
-  }));
-  document.querySelector(".case-close")?.addEventListener("click", () => dialog.close());
+  document.querySelectorAll("[data-case]").forEach((button) =>
+    button.addEventListener("click", () => {
+      if (!cases[button.dataset.case]) return;
+      caseTrigger = button;
+      activeCaseKey = button.dataset.case;
+      renderCase(activeCaseKey);
+      dialog.showModal();
+    }),
+  );
+  document
+    .querySelector(".case-close")
+    ?.addEventListener("click", () => dialog.close());
   dialog?.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
