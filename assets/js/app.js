@@ -15,6 +15,7 @@
   const menuButton = $(".menu-button");
   const mobileNav = $(".mobile-nav");
   const toast = $(".toast");
+
   let toastTimer;
   let currentLang = preference.get("portfolio-language", "fr");
   let activeCaseKey = null;
@@ -22,6 +23,7 @@
 
   function showToast(message) {
     if (!toast) return;
+
     toast.textContent = message;
     toast.classList.add("visible");
     clearTimeout(toastTimer);
@@ -36,12 +38,14 @@
       "aria-label",
       `${uiText[currentLang].palette}: ${paletteButton.textContent}`,
     );
+
     contrastButton?.setAttribute(
       "aria-label",
       currentLang === "en"
         ? `${contrastOn ? "Disable" : "Enable"} enhanced contrast`
         : `${contrastOn ? "Désactiver" : "Activer"} le contraste renforcé`,
     );
+
     motionButton?.setAttribute(
       "aria-label",
       currentLang === "en"
@@ -83,7 +87,9 @@
     placeholders.forEach((element) => {
       element.setAttribute(
         "placeholder",
-        currentLang === "en" ? element.dataset.placeholderEn : element.dataset.placeholderFr,
+        currentLang === "en"
+          ? element.dataset.placeholderEn
+          : element.dataset.placeholderFr,
       );
     });
 
@@ -91,7 +97,9 @@
       languageButton.textContent = currentLang === "en" ? "FR" : "EN";
       languageButton.setAttribute(
         "aria-label",
-        currentLang === "en" ? "Afficher le site en français" : "Display the site in English",
+        currentLang === "en"
+          ? "Afficher le site en français"
+          : "Display the site in English",
       );
     }
 
@@ -115,12 +123,14 @@
 
     refreshPreferenceLabels();
     preference.set("portfolio-language", currentLang);
+
     if (activeCaseKey) renderCase(activeCaseKey);
     languageHooks.forEach((hook) => hook(currentLang));
   }
 
   function applyToggle(button, className, key, enabled) {
     if (!button) return;
+
     html.classList.toggle(className, enabled);
     button.setAttribute("aria-pressed", String(enabled));
     preference.set(key, String(enabled));
@@ -129,26 +139,39 @@
 
   function applyPalette(key) {
     const palette = palettes.find((item) => item.key === key) || palettes[0];
+
     palettes.forEach((item) => {
       if (item.className) html.classList.remove(item.className);
     });
+
     if (palette.className) html.classList.add(palette.className);
     if (paletteButton) paletteButton.textContent = palette.label;
+
     preference.set("portfolio-palette", palette.key);
     refreshPreferenceLabels();
   }
 
-  languageButton?.addEventListener("click", () => applyLanguage(currentLang === "fr" ? "en" : "fr"));
+  languageButton?.addEventListener("click", () => {
+    applyLanguage(currentLang === "fr" ? "en" : "fr");
+  });
 
   paletteButton?.addEventListener("click", () => {
-    const activeKey = palettes.find((item) => item.label === paletteButton.textContent)?.key || palettes[0].key;
-    const next = palettes[(palettes.findIndex((item) => item.key === activeKey) + 1) % palettes.length];
+    const activeKey =
+      palettes.find((item) => item.label === paletteButton.textContent)?.key ||
+      palettes[0].key;
+    const activeIndex = palettes.findIndex((item) => item.key === activeKey);
+    const next = palettes[(activeIndex + 1) % palettes.length];
     applyPalette(next.key);
   });
 
   contrastButton?.addEventListener("click", () => {
     const enabled = contrastButton.getAttribute("aria-pressed") !== "true";
-    applyToggle(contrastButton, "high-contrast", "portfolio-contrast", enabled);
+    applyToggle(
+      contrastButton,
+      "high-contrast",
+      "portfolio-contrast",
+      enabled,
+    );
   });
 
   motionButton?.addEventListener("click", () => {
@@ -158,8 +181,18 @@
   });
 
   applyPalette(preference.get("portfolio-palette", "signal"));
-  applyToggle(contrastButton, "high-contrast", "portfolio-contrast", preference.get("portfolio-contrast", "false") === "true");
-  applyToggle(motionButton, "reduce-motion", "portfolio-motion", preference.get("portfolio-motion", "false") === "true");
+  applyToggle(
+    contrastButton,
+    "high-contrast",
+    "portfolio-contrast",
+    preference.get("portfolio-contrast", "false") === "true",
+  );
+  applyToggle(
+    motionButton,
+    "reduce-motion",
+    "portfolio-motion",
+    preference.get("portfolio-motion", "false") === "true",
+  );
   applyLanguage(currentLang);
 
   menuButton?.addEventListener("click", () => {
@@ -174,31 +207,83 @@
     });
   });
 
+  // Ticker infini : construit deux groupes identiques et suffisamment longs
+  // pour qu’aucun espace vide ne puisse apparaître pendant le défilement.
+  const ticker = $(".ticker");
+  const tickerTrack = $(".ticker-track");
+  const tickerGroup = $(".ticker-group");
+
+  if (ticker && tickerTrack && tickerGroup) {
+    const seedNodes = [...tickerGroup.children].map((node) => node.cloneNode(true));
+    let resizeFrame;
+
+    function appendTickerSeed(target) {
+      seedNodes.forEach((node) => target.append(node.cloneNode(true)));
+    }
+
+    function buildTicker() {
+      tickerTrack.querySelectorAll(".ticker-group[aria-hidden='true']").forEach((group) => group.remove());
+      tickerGroup.replaceChildren();
+      appendTickerSeed(tickerGroup);
+
+      // On dépasse volontairement la largeur visible pour garantir une couverture
+      // continue même pendant les redimensionnements et sur les grands écrans.
+      const minimumWidth = Math.max(ticker.clientWidth * 1.25, 900);
+      while (tickerGroup.scrollWidth < minimumWidth) appendTickerSeed(tickerGroup);
+
+      const clone = tickerGroup.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      tickerTrack.append(clone);
+
+      // Vitesse constante (~72 px/s), indépendamment de la largeur générée.
+      const duration = Math.max(12, tickerGroup.scrollWidth / 72);
+      ticker.style.setProperty("--ticker-duration", `${duration.toFixed(2)}s`);
+    }
+
+    buildTicker();
+
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(buildTicker);
+    }, { passive: true });
+  }
+
   const progress = $(".reading-progress span");
+
   function updateProgress() {
     if (!progress) return;
+
     const available = html.scrollHeight - window.innerHeight;
-    progress.style.width = `${available > 0 ? (window.scrollY / available) * 100 : 0}%`;
+    const ratio = available > 0 ? window.scrollY / available : 0;
+    progress.style.width = `${ratio * 100}%`;
   }
+
   window.addEventListener("scroll", updateProgress, { passive: true });
   updateProgress();
 
   const navLinks = $$(".desktop-nav a");
-  const navTargets = navLinks.map((link) => $(link.getAttribute("href"))).filter(Boolean);
+  const navTargets = navLinks
+    .map((link) => $(link.getAttribute("href")))
+    .filter(Boolean);
+
   if ("IntersectionObserver" in window) {
     const navObserver = new IntersectionObserver(
-      (entries) =>
+      (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
+
           navLinks.forEach((link) => {
             const active = link.getAttribute("href") === `#${entry.target.id}`;
             link.classList.toggle("active", active);
+
             if (active) link.setAttribute("aria-current", "location");
             else link.removeAttribute("aria-current");
           });
-        }),
+        });
+      },
       { rootMargin: "-35% 0px -60%" },
     );
+
     navTargets.forEach((target) => navObserver.observe(target));
   }
 
@@ -207,6 +292,7 @@
   const commandInput = $("#command-input");
   const commandClose = $(".command-close");
   const commandItems = $$(".command-list > [role='option']");
+
   let commandReturnFocus = null;
   let commandIndex = 0;
 
@@ -217,31 +303,44 @@
   function selectCommand(index) {
     const visible = visibleCommands();
     if (!visible.length || !commandInput) return;
+
     commandIndex = (index + visible.length) % visible.length;
+
     commandItems.forEach((item) => {
       item.classList.remove("selected");
       item.setAttribute("aria-selected", "false");
     });
-    visible[commandIndex].classList.add("selected");
-    visible[commandIndex].setAttribute("aria-selected", "true");
-    commandInput.setAttribute("aria-activedescendant", visible[commandIndex].id || "");
-    visible[commandIndex].scrollIntoView({ block: "nearest" });
+
+    const selected = visible[commandIndex];
+    selected.classList.add("selected");
+    selected.setAttribute("aria-selected", "true");
+    commandInput.setAttribute("aria-activedescendant", selected.id || "");
+    selected.scrollIntoView({ block: "nearest" });
   }
 
   function filterCommands() {
     if (!commandInput) return;
+
     const query = commandInput.value.trim().toLocaleLowerCase(currentLang);
+
     commandItems.forEach((item) => {
-      item.hidden = Boolean(query) && !item.textContent.toLocaleLowerCase(currentLang).includes(query);
+      item.hidden =
+        Boolean(query) &&
+        !item.textContent.toLocaleLowerCase(currentLang).includes(query);
     });
+
     selectCommand(0);
   }
 
   function openCommands(trigger = document.activeElement) {
     if (!commandDialog || !commandInput) return;
+
     commandReturnFocus = trigger;
     commandInput.value = "";
-    commandItems.forEach((item) => (item.hidden = false));
+    commandItems.forEach((item) => {
+      item.hidden = false;
+    });
+
     commandDialog.showModal();
     commandInput.setAttribute("aria-expanded", "true");
     selectCommand(0);
@@ -256,10 +355,12 @@
       event.preventDefault();
       selectCommand(commandIndex + 1);
     }
+
     if (event.key === "ArrowUp") {
       event.preventDefault();
       selectCommand(commandIndex - 1);
     }
+
     if (event.key === "Enter") {
       event.preventDefault();
       visibleCommands()[commandIndex]?.click();
@@ -269,30 +370,34 @@
   document.addEventListener("keydown", (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
       event.preventDefault();
+
       if (commandDialog?.open) commandDialog.close();
       else openCommands();
     }
   });
 
-  commandItems.forEach((item) =>
+  commandItems.forEach((item) => {
     item.addEventListener("click", () => {
       const target = item.dataset.target;
       commandDialog?.close();
+
       if (item.dataset.command === "tour") {
         openTour();
         return;
       }
+
       if (target) {
         $(target)?.scrollIntoView({
           behavior: html.classList.contains("reduce-motion") ? "auto" : "smooth",
         });
       }
-    }),
-  );
+    });
+  });
 
   commandDialog?.addEventListener("click", (event) => {
     if (event.target === commandDialog) commandDialog.close();
   });
+
   commandDialog?.addEventListener("close", () => {
     commandInput?.setAttribute("aria-expanded", "false");
     commandInput?.removeAttribute("aria-activedescendant");
@@ -300,11 +405,17 @@
   });
 
   const reveals = $$(".reveal");
+
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      },
       { threshold: 0.12 },
     );
+
     reveals.forEach((element) => observer.observe(element));
   } else {
     reveals.forEach((element) => element.classList.add("visible"));
@@ -318,6 +429,7 @@
   const tempo = $("#tempo");
   const waveform = $("#waveform");
   const bpmLabel = $("#bpm-label");
+
   let audioContext;
   let sequence = [];
   let timer;
@@ -331,15 +443,18 @@
 
   function tone(pad, record = true) {
     if (!pad) return;
+
     const ctx = context();
     const oscillator = ctx.createOscillator();
     const gain = ctx.createGain();
 
     oscillator.type = waveform?.value || "triangle";
     oscillator.frequency.value = Number(pad.dataset.note);
+
     gain.gain.setValueAtTime(0.0001, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.22, ctx.currentTime + 0.015);
     gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.24);
+
     oscillator.connect(gain).connect(ctx.destination);
     oscillator.start();
     oscillator.stop(ctx.currentTime + 0.26);
@@ -348,13 +463,17 @@
     setTimeout(() => pad.classList.remove("active"), 150);
 
     if (screenLabel) {
-      screenLabel.textContent = `${pad.dataset.key} · ${pad.querySelector("span")?.textContent || ""}`;
+      const note = pad.querySelector("span")?.textContent || "";
+      screenLabel.textContent = `${pad.dataset.key} · ${note}`;
     }
 
     if (record && !timer) {
       sequence.push(pad);
       if (sequence.length > 16) sequence.shift();
-      if (screenLabel) screenLabel.textContent += ` · ${sequence.length} ${uiText[currentLang].steps}`;
+
+      if (screenLabel) {
+        screenLabel.textContent += ` · ${sequence.length} ${uiText[currentLang].steps}`;
+      }
     }
   }
 
@@ -362,38 +481,58 @@
     clearInterval(timer);
     timer = undefined;
     step = 0;
+
     playButton?.setAttribute("aria-pressed", "false");
-    if (playButton) playButton.innerHTML = `<span aria-hidden="true">▶</span> ${uiText[currentLang].play}`;
+    if (playButton) {
+      playButton.innerHTML = `<span aria-hidden="true">▶</span> ${uiText[currentLang].play}`;
+    }
+
     instrument?.classList.remove("playing");
   }
 
   function play() {
-    if (timer) return stop();
-    if (!sequence.length) sequence = pads.filter((_, index) => [0, 2, 4, 7].includes(index));
+    if (timer) {
+      stop();
+      return;
+    }
+
+    if (!sequence.length) {
+      sequence = pads.filter((_, index) => [0, 2, 4, 7].includes(index));
+    }
+
     const beat = () => {
       tone(sequence[step % sequence.length], false);
       step += 1;
     };
+
     beat();
     timer = setInterval(beat, 60000 / Number(tempo?.value || 96) / 2);
+
     playButton?.setAttribute("aria-pressed", "true");
-    if (playButton) playButton.innerHTML = `<span aria-hidden="true">■</span> ${uiText[currentLang].stop}`;
+    if (playButton) {
+      playButton.innerHTML = `<span aria-hidden="true">■</span> ${uiText[currentLang].stop}`;
+    }
+
     instrument?.classList.add("playing");
   }
 
-  pads.forEach((pad) => pad.addEventListener("click", () => tone(pad)));
+  pads.forEach((pad) => {
+    pad.addEventListener("click", () => tone(pad));
+  });
 
-  // Correctif clavier IDEA MACHINE:
-  // On n'ignore plus les raccourcis quand le focus est sur un BUTTON.
-  // On les ignore seulement lorsque l'utilisateur écrit réellement dans un champ.
   document.addEventListener("keydown", (event) => {
     const active = document.activeElement;
-    const isTyping = active?.matches?.("input, textarea, select, [contenteditable='true']");
-    const dialogOpen = commandDialog?.open || $("#tour-dialog")?.open || $("#case-dialog")?.open;
+    const isTyping = active?.matches?.(
+      "input, textarea, select, [contenteditable='true']",
+    );
+    const dialogOpen =
+      commandDialog?.open || $("#tour-dialog")?.open || $("#case-dialog")?.open;
 
     if (event.repeat || isTyping || dialogOpen) return;
 
-    const pad = pads.find((item) => item.dataset.key === event.key.toUpperCase());
+    const pad = pads.find(
+      (item) => item.dataset.key === event.key.toUpperCase(),
+    );
     if (!pad) return;
 
     event.preventDefault();
@@ -401,13 +540,16 @@
   });
 
   playButton?.addEventListener("click", play);
+
   clearButton?.addEventListener("click", () => {
     stop();
     sequence = [];
     if (screenLabel) screenLabel.textContent = uiText[currentLang].cleared;
   });
+
   tempo?.addEventListener("input", () => {
     if (bpmLabel) bpmLabel.textContent = `${tempo.value} BPM`;
+
     if (timer) {
       stop();
       play();
@@ -420,24 +562,45 @@
 
   function filterProjects(filter = "all") {
     let visible = 0;
+
     projectCards.forEach((project) => {
-      const show = filter === "all" || project.dataset.projectTags.split(" ").includes(filter);
+      const tags = project.dataset.projectTags.split(" ");
+      const show = filter === "all" || tags.includes(filter);
+
       project.classList.toggle("filtered-out", !show);
       if (show) visible += 1;
     });
-    filterButtons.forEach((button) => button.classList.toggle("active", button.dataset.filter === filter));
+
+    filterButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.filter === filter);
+    });
+
     if (projectCount) {
-      projectCount.textContent = visible === 1 ? uiText[currentLang].projectShown : `${visible} ${uiText[currentLang].projectsShown}`;
+      projectCount.textContent =
+        visible === 1
+          ? uiText[currentLang].projectShown
+          : `${visible} ${uiText[currentLang].projectsShown}`;
     }
   }
 
-  filterButtons.forEach((button) => button.addEventListener("click", () => filterProjects(button.dataset.filter)));
-  languageHooks.push(() => filterProjects(filterButtons.find((button) => button.classList.contains("active"))?.dataset.filter || "all"));
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => filterProjects(button.dataset.filter));
+  });
+
+  languageHooks.push(() => {
+    const activeFilter =
+      filterButtons.find((button) => button.classList.contains("active"))?.dataset
+        .filter || "all";
+    filterProjects(activeFilter);
+  });
+
   filterProjects("all");
 
   const skillRanges = $$(".skill-range");
   const mixBars = $$(".mix-bars i");
-  const skillValueLabels = Object.fromEntries($$("[data-skill-value]").map((item) => [item.dataset.skillValue, item]));
+  const skillValueLabels = Object.fromEntries(
+    $$("[data-skill-value]").map((item) => [item.dataset.skillValue, item]),
+  );
   const mixHeadline = $("#mix-headline");
   const mixDescription = $("#mix-description");
   const mixDominant = $("#mix-dominant");
@@ -447,7 +610,10 @@
 
   function storedMix() {
     try {
-      return { ...mixDefaults, ...JSON.parse(preference.get("portfolio-skill-mix", "{}")) };
+      return {
+        ...mixDefaults,
+        ...JSON.parse(preference.get("portfolio-skill-mix", "{}")),
+      };
     } catch {
       return { ...mixDefaults };
     }
@@ -456,34 +622,55 @@
   function setMix(values) {
     skillRanges.forEach((range, index) => {
       const value = Number(values[range.dataset.skill] ?? range.value);
+
       range.value = value;
       range.setAttribute("aria-valuetext", `${value}%`);
-      if (skillValueLabels[range.dataset.skill]) skillValueLabels[range.dataset.skill].textContent = `${value}%`;
+
+      const valueLabel = skillValueLabels[range.dataset.skill];
+      if (valueLabel) valueLabel.textContent = `${value}%`;
       if (mixBars[index]) mixBars[index].style.setProperty("--h", `${value}%`);
     });
   }
 
   function updateSkillMix(save = true) {
-    const values = Object.fromEntries(skillRanges.map((range) => [range.dataset.skill, Number(range.value)]));
+    const values = Object.fromEntries(
+      skillRanges.map((range) => [range.dataset.skill, Number(range.value)]),
+    );
     const entries = Object.entries(values).sort((a, b) => b[1] - a[1]);
-    const dominant = entries[0][1] - entries[entries.length - 1][1] < 16 ? "balanced" : entries[0][0];
-    const average = Math.round(Object.values(values).reduce((total, value) => total + value, 0) / Object.values(values).length);
+    const spread = entries[0][1] - entries[entries.length - 1][1];
+    const dominant = spread < 16 ? "balanced" : entries[0][0];
+    const average = Math.round(
+      Object.values(values).reduce((total, value) => total + value, 0) /
+        Object.values(values).length,
+    );
     const [headline, description] = mixTexts[currentLang][dominant];
 
     if (mixHeadline) mixHeadline.textContent = headline;
     if (mixDescription) mixDescription.textContent = description;
-    if (mixDominant) mixDominant.textContent = dominant === "balanced" ? headline : entries[0][0].toUpperCase();
+    if (mixDominant) {
+      mixDominant.textContent =
+        dominant === "balanced" ? headline : entries[0][0].toUpperCase();
+    }
     if (mixAverage) mixAverage.textContent = `${average}%`;
+
     setMix(values);
-    if (save) preference.set("portfolio-skill-mix", JSON.stringify(values));
+
+    if (save) {
+      preference.set("portfolio-skill-mix", JSON.stringify(values));
+    }
   }
 
   setMix(storedMix());
-  skillRanges.forEach((range) => range.addEventListener("input", () => updateSkillMix()));
+
+  skillRanges.forEach((range) => {
+    range.addEventListener("input", () => updateSkillMix());
+  });
+
   mixReset?.addEventListener("click", () => {
     setMix(mixDefaults);
     updateSkillMix();
   });
+
   languageHooks.push(() => updateSkillMix(false));
   updateSkillMix(false);
 
@@ -492,6 +679,7 @@
   const briefMeter = $("#brief-meter");
   const briefScore = $("#brief-score");
   const briefCopy = $("#brief-copy");
+
   let currentBrief = "";
 
   function activeBriefChoice(group) {
@@ -499,16 +687,25 @@
   }
 
   function briefPhrase(choice) {
-    return currentLang === "en" ? choice.dataset.briefEn : choice.dataset.briefFr;
+    return currentLang === "en"
+      ? choice.dataset.briefEn
+      : choice.dataset.briefFr;
   }
 
   function updateBrief() {
     const goal = activeBriefChoice("goal");
     const format = activeBriefChoice("format");
     const constraint = activeBriefChoice("constraint");
+
     if (!goal || !format || !constraint) return;
 
-    const score = Math.min(99, Number(goal.dataset.score) + Number(format.dataset.score) + Number(constraint.dataset.score));
+    const score = Math.min(
+      99,
+      Number(goal.dataset.score) +
+        Number(format.dataset.score) +
+        Number(constraint.dataset.score),
+    );
+
     currentBrief =
       currentLang === "en"
         ? `I can help you ${briefPhrase(goal)} ${briefPhrase(format)}, ${briefPhrase(constraint)}.`
@@ -519,14 +716,18 @@
     if (briefMeter) briefMeter.style.width = `${score}%`;
   }
 
-  briefChoices.forEach((choice) =>
+  briefChoices.forEach((choice) => {
     choice.addEventListener("click", () => {
       const group = choice.closest("[data-brief-group]");
-      group?.querySelectorAll(".choice").forEach((item) => item.classList.remove("active"));
+      group
+        ?.querySelectorAll(".choice")
+        .forEach((item) => item.classList.remove("active"));
+
       choice.classList.add("active");
       updateBrief();
-    }),
-  );
+    });
+  });
+
   languageHooks.push(updateBrief);
   updateBrief();
 
@@ -548,50 +749,77 @@
   const tourPrev = $("#tour-prev");
   const tourNext = $("#tour-next");
   const tourClose = $("#tour-close");
+
   let tourIndex = 0;
 
   function renderTour() {
     const stepData = tourSteps[tourIndex];
     if (!stepData) return;
+
     const data = stepData[currentLang];
-    if (tourStep) tourStep.textContent = `${String(tourIndex + 1).padStart(2, "0")} / ${String(tourSteps.length).padStart(2, "0")}`;
+
+    if (tourStep) {
+      tourStep.textContent = `${String(tourIndex + 1).padStart(2, "0")} / ${String(tourSteps.length).padStart(2, "0")}`;
+    }
     if (tourTitle) tourTitle.textContent = data[0];
     if (tourText) tourText.textContent = data[1];
     if (tourPrev) tourPrev.disabled = tourIndex === 0;
-    if (tourNext) tourNext.textContent = tourIndex === tourSteps.length - 1 ? (currentLang === "en" ? "Finish" : "Terminer") : currentLang === "en" ? "Next" : "Suivant";
-    $(stepData.target)?.scrollIntoView({ behavior: html.classList.contains("reduce-motion") ? "auto" : "smooth", block: "start" });
+    if (tourNext) {
+      tourNext.textContent =
+        tourIndex === tourSteps.length - 1
+          ? currentLang === "en"
+            ? "Finish"
+            : "Terminer"
+          : currentLang === "en"
+            ? "Next"
+            : "Suivant";
+    }
+
+    $(stepData.target)?.scrollIntoView({
+      behavior: html.classList.contains("reduce-motion") ? "auto" : "smooth",
+      block: "start",
+    });
   }
 
   function openTour() {
     if (!tourDialog) return;
+
     tourIndex = 0;
     renderTour();
     tourDialog.showModal();
   }
 
   tourTrigger?.addEventListener("click", openTour);
+
   mobileTourTrigger?.addEventListener("click", () => {
     mobileNav?.classList.remove("open");
     menuButton?.setAttribute("aria-expanded", "false");
     openTour();
   });
+
   tourPrev?.addEventListener("click", () => {
     if (tourIndex > 0) {
       tourIndex -= 1;
       renderTour();
     }
   });
+
   tourNext?.addEventListener("click", () => {
-    if (tourIndex >= tourSteps.length - 1) tourDialog?.close();
-    else {
-      tourIndex += 1;
-      renderTour();
+    if (tourIndex >= tourSteps.length - 1) {
+      tourDialog?.close();
+      return;
     }
+
+    tourIndex += 1;
+    renderTour();
   });
+
   tourClose?.addEventListener("click", () => tourDialog?.close());
+
   tourDialog?.addEventListener("click", (event) => {
     if (event.target === tourDialog) tourDialog.close();
   });
+
   languageHooks.push(() => {
     if (tourDialog?.open) renderTour();
   });
@@ -600,15 +828,22 @@
     $$('[data-tilt]').forEach((element) => {
       element.addEventListener("pointermove", (event) => {
         if (html.classList.contains("reduce-motion")) return;
+
         const rect = element.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
+
         element.style.setProperty("--tilt-x", `${(x - 0.5) * 5}deg`);
         element.style.setProperty("--tilt-y", `${(0.5 - y) * 5}deg`);
+        element.style.setProperty("--glow-x", `${x * 100}%`);
+        element.style.setProperty("--glow-y", `${y * 100}%`);
       });
+
       element.addEventListener("pointerleave", () => {
         element.style.setProperty("--tilt-x", "0deg");
         element.style.setProperty("--tilt-y", "0deg");
+        element.style.setProperty("--glow-x", "50%");
+        element.style.setProperty("--glow-y", "50%");
       });
     });
   }
@@ -623,39 +858,49 @@
     explore: $("#case-explore"),
   };
   const caseLink = $("#case-link");
+
   let caseTrigger;
 
   function renderCase(key) {
     const entry = cases[key];
     if (!entry) return;
+
     const data = entry[currentLang];
+
     Object.entries(caseFields).forEach(([field, element]) => {
       if (element) element.textContent = data[field];
     });
+
     if (caseLink) caseLink.href = entry.link;
   }
 
-  $$('[data-case]').forEach((button) =>
+  $$('[data-case]').forEach((button) => {
     button.addEventListener("click", () => {
       if (!cases[button.dataset.case]) return;
+
       caseTrigger = button;
       activeCaseKey = button.dataset.case;
       renderCase(activeCaseKey);
       dialog?.showModal();
-    }),
-  );
+    });
+  });
+
   $(".case-close")?.addEventListener("click", () => dialog?.close());
+
   dialog?.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
+
   dialog?.addEventListener("close", () => {
     activeCaseKey = null;
     caseTrigger?.focus?.();
   });
 
   const copyButton = $(".copy-email");
+
   copyButton?.addEventListener("click", async () => {
     const value = copyButton.dataset.copy;
+
     try {
       await copyToClipboard(value);
       showToast(uiText[currentLang].copied);
