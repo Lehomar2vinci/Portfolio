@@ -5,7 +5,9 @@
   const { copyToClipboard, preference } = window.PortfolioUtils;
 
   const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const $$ = (selector, root = document) => [
+    ...root.querySelectorAll(selector),
+  ];
 
   const html = document.documentElement;
   const languageButton = $("#lang-toggle");
@@ -74,13 +76,16 @@
     html.lang = currentLang;
 
     translatable.forEach((element) => {
-      element.innerHTML = currentLang === "en" ? element.dataset.en : element.dataset.fr;
+      element.innerHTML =
+        currentLang === "en" ? element.dataset.en : element.dataset.fr;
     });
 
     labelled.forEach((element) => {
       element.setAttribute(
         "aria-label",
-        currentLang === "en" ? element.dataset.labelEn : element.dataset.labelFr,
+        currentLang === "en"
+          ? element.dataset.labelEn
+          : element.dataset.labelFr,
       );
     });
 
@@ -166,12 +171,7 @@
 
   contrastButton?.addEventListener("click", () => {
     const enabled = contrastButton.getAttribute("aria-pressed") !== "true";
-    applyToggle(
-      contrastButton,
-      "high-contrast",
-      "portfolio-contrast",
-      enabled,
-    );
+    applyToggle(contrastButton, "high-contrast", "portfolio-contrast", enabled);
   });
 
   motionButton?.addEventListener("click", () => {
@@ -214,7 +214,9 @@
   const tickerGroup = $(".ticker-group");
 
   if (ticker && tickerTrack && tickerGroup) {
-    const seedNodes = [...tickerGroup.children].map((node) => node.cloneNode(true));
+    const seedNodes = [...tickerGroup.children].map((node) =>
+      node.cloneNode(true),
+    );
     let resizeFrame;
 
     function appendTickerSeed(target) {
@@ -222,14 +224,17 @@
     }
 
     function buildTicker() {
-      tickerTrack.querySelectorAll(".ticker-group[aria-hidden='true']").forEach((group) => group.remove());
+      tickerTrack
+        .querySelectorAll(".ticker-group[aria-hidden='true']")
+        .forEach((group) => group.remove());
       tickerGroup.replaceChildren();
       appendTickerSeed(tickerGroup);
 
       // On dépasse volontairement la largeur visible pour garantir une couverture
       // continue même pendant les redimensionnements et sur les grands écrans.
       const minimumWidth = Math.max(ticker.clientWidth * 1.25, 900);
-      while (tickerGroup.scrollWidth < minimumWidth) appendTickerSeed(tickerGroup);
+      while (tickerGroup.scrollWidth < minimumWidth)
+        appendTickerSeed(tickerGroup);
 
       const clone = tickerGroup.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
@@ -242,10 +247,14 @@
 
     buildTicker();
 
-    window.addEventListener("resize", () => {
-      cancelAnimationFrame(resizeFrame);
-      resizeFrame = requestAnimationFrame(buildTicker);
-    }, { passive: true });
+    window.addEventListener(
+      "resize",
+      () => {
+        cancelAnimationFrame(resizeFrame);
+        resizeFrame = requestAnimationFrame(buildTicker);
+      },
+      { passive: true },
+    );
   }
 
   const progress = $(".reading-progress span");
@@ -388,7 +397,9 @@
 
       if (target) {
         $(target)?.scrollIntoView({
-          behavior: html.classList.contains("reduce-motion") ? "auto" : "smooth",
+          behavior: html.classList.contains("reduce-motion")
+            ? "auto"
+            : "smooth",
         });
       }
     });
@@ -584,13 +595,15 @@
   }
 
   filterButtons.forEach((button) => {
-    button.addEventListener("click", () => filterProjects(button.dataset.filter));
+    button.addEventListener("click", () =>
+      filterProjects(button.dataset.filter),
+    );
   });
 
   languageHooks.push(() => {
     const activeFilter =
-      filterButtons.find((button) => button.classList.contains("active"))?.dataset
-        .filter || "all";
+      filterButtons.find((button) => button.classList.contains("active"))
+        ?.dataset.filter || "all";
     filterProjects(activeFilter);
   });
 
@@ -825,7 +838,7 @@
   });
 
   if (window.matchMedia("(pointer: fine)").matches) {
-    $$('[data-tilt]').forEach((element) => {
+    $$("[data-tilt]").forEach((element) => {
       element.addEventListener("pointermove", (event) => {
         if (html.classList.contains("reduce-motion")) return;
 
@@ -874,7 +887,7 @@
     if (caseLink) caseLink.href = entry.link;
   }
 
-  $$('[data-case]').forEach((button) => {
+  $$("[data-case]").forEach((button) => {
     button.addEventListener("click", () => {
       if (!cases[button.dataset.case]) return;
 
