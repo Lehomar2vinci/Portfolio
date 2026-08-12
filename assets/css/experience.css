@@ -1,0 +1,690 @@
+/*
+  EXPERIENCE LAYER — Portfolio v3
+  Améliorations visuelles et interactives non destructives.
+  Ce fichier est chargé après les styles historiques afin de conserver
+  l'identité existante tout en renforçant la profondeur et la lisibilité.
+*/
+
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --surface-shadow: 9px 9px 0 var(--ink);
+  --surface-shadow-small: 5px 5px 0 var(--ink);
+  --section-space: clamp(72px, 8vw, 120px);
+}
+
+body {
+  position: relative;
+  overflow-x: clip;
+  background-image:
+    radial-gradient(circle at 10% 12%, rgba(36, 85, 230, 0.055), transparent 26rem),
+    radial-gradient(circle at 88% 38%, rgba(255, 105, 85, 0.045), transparent 30rem);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* Navigation plus compacte après le premier écran. */
+.topbar {
+  transition:
+    height 0.32s var(--ease-out-expo),
+    padding 0.32s var(--ease-out-expo),
+    box-shadow 0.32s ease,
+    background 0.32s ease;
+}
+.topbar.is-scrolled {
+  height: 64px;
+  padding-block: 7px;
+  background: rgba(244, 240, 232, 0.975);
+  box-shadow: 0 7px 0 rgba(17, 17, 15, 0.06);
+}
+.topbar.is-scrolled .wordmark span {
+  width: 42px;
+  height: 42px;
+}
+.wordmark span,
+.desktop-nav a,
+.pref-button,
+.contact-pill,
+.command-trigger,
+.tour-trigger {
+  transition:
+    transform 0.2s var(--ease-snap),
+    box-shadow 0.2s var(--ease-snap),
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.desktop-nav a {
+  position: relative;
+  overflow: hidden;
+}
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px 6px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s var(--ease-out-expo);
+}
+.desktop-nav a:hover::after,
+.desktop-nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* Moniteur d'état discret : section courante + progression globale. */
+.signal-monitor {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 48;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 9px;
+  min-width: 190px;
+  padding: 8px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(244, 240, 232, 0.92);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  backdrop-filter: blur(10px);
+  font: 700 0.6rem/1 "Courier New", monospace;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    opacity 0.3s ease;
+}
+.signal-monitor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 3px rgba(17, 17, 15, 0.14);
+}
+.signal-monitor-section {
+  min-width: 86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.signal-monitor-progress {
+  justify-self: end;
+  padding-left: 8px;
+  border-left: 1px solid currentColor;
+}
+
+/* HERO — signal graphique, profondeur, lecture plus éditoriale. */
+.hero {
+  --pointer-x: 70%;
+  --pointer-y: 38%;
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, 0.36), transparent 25rem),
+    var(--yellow);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(17, 17, 15, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 15, 0.15) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to right, black 0 42%, transparent 78%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  width: min(54vw, 760px);
+  aspect-ratio: 1;
+  right: -13vw;
+  top: 5%;
+  z-index: -1;
+  border: 2px solid rgba(17, 17, 15, 0.35);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 44px rgba(17, 17, 15, 0.035),
+    0 0 0 90px rgba(17, 17, 15, 0.025);
+  pointer-events: none;
+}
+.hero-copy {
+  max-width: 760px;
+}
+.hero-copy::before {
+  content: "SIGNAL / 001";
+  position: absolute;
+  top: -36px;
+  left: 0;
+  font: 700 0.58rem/1 "Courier New", monospace;
+  letter-spacing: 0.12em;
+  opacity: 0.62;
+}
+.hero-tagline {
+  transform: rotate(-0.7deg);
+}
+.hero-intro {
+  line-height: 1.55;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -12px 0 30px;
+}
+.hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(244, 240, 232, 0.7);
+  font: 700 0.58rem/1 "Courier New", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hero-meta span:first-child::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #23a843;
+}
+.round-link {
+  position: relative;
+  overflow: hidden;
+}
+.round-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateX(-104%);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.round-link:hover {
+  color: var(--paper);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.round-link:hover::before {
+  transform: translateX(0);
+}
+.round-link > * ,
+.round-link {
+  isolation: isolate;
+}
+.round-link span {
+  position: relative;
+  z-index: 1;
+}
+
+/* IDEA MACHINE — instrument plus tactile et séquence 16 pas. */
+.instrument {
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s var(--ease-out-expo),
+    filter 0.3s ease;
+}
+.instrument::after {
+  z-index: 5;
+}
+.instrument::before {
+  z-index: 5;
+}
+.instrument:hover {
+  box-shadow: 18px 18px 0 var(--ink);
+}
+.instrument .screen {
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(201, 240, 74, 0.18);
+}
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    rgba(201, 240, 74, 0.28) 3px 4px
+  );
+}
+.sequence-strip {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 4px;
+  padding: 10px 0 2px;
+}
+.sequence-step {
+  height: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transition:
+    transform 0.12s ease,
+    background 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.sequence-step.filled {
+  background: var(--lime);
+}
+.sequence-step.current {
+  transform: scaleY(1.7);
+  background: var(--coral);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+.transport.randomize {
+  background: var(--yellow);
+}
+.transport:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.pad:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.pad.active,
+.pad:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+/* Ticker : conserver la boucle infinie, avec séparation visuelle nette. */
+.ticker {
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+.ticker::before,
+.ticker::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: 2;
+  width: 42px;
+  pointer-events: none;
+  background: linear-gradient(to right, var(--coral), transparent);
+}
+.ticker::after {
+  inset: 0 0 0 auto;
+  background: linear-gradient(to left, var(--coral), transparent);
+}
+.ticker-group {
+  padding-block: 14px;
+}
+.ticker span {
+  letter-spacing: 0.12em;
+}
+
+/* Sections : rythme éditorial et repères structurants. */
+.section-heading,
+.manifesto,
+.path {
+  position: relative;
+}
+.section-heading::before,
+.manifesto::before,
+.path::before {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: 76px;
+  width: 42px;
+  height: 5px;
+  background: var(--blue);
+  box-shadow: 48px 0 0 var(--coral), 96px 0 0 var(--lime);
+}
+.section-heading .section-index,
+.manifesto > .section-index {
+  padding-top: 18px;
+}
+.section-heading h2,
+.manifesto h2,
+.contact > a {
+  text-wrap: balance;
+}
+.manifesto h2 span {
+  display: inline-block;
+  transform: rotate(-1deg);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.manifesto-grid > p {
+  position: relative;
+  padding-left: 22px;
+  border-left: 4px solid var(--coral);
+}
+.manifesto li {
+  transition:
+    padding-left 0.24s var(--ease-out-expo),
+    background 0.2s ease;
+}
+.manifesto li:hover {
+  padding-left: 14px;
+  background: var(--yellow);
+}
+
+/* Mixeur et studio : appareils plus cohérents avec l'IDEA MACHINE. */
+.mixer-console,
+.mixer-output,
+.brief-controls,
+.brief-output {
+  border-width: 3px;
+}
+.mixer-console label {
+  position: relative;
+  overflow: hidden;
+}
+.mixer-console label::after {
+  content: "";
+  position: absolute;
+  inset: auto 10px 12px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--lime));
+  opacity: 0.6;
+}
+.mixer-output,
+.brief-output {
+  position: relative;
+}
+.mixer-output::before,
+.brief-output::before {
+  content: "OUTPUT";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  opacity: 0.45;
+  font: 700 0.55rem/1 "Courier New", monospace;
+  letter-spacing: 0.12em;
+}
+.choice {
+  transition:
+    transform 0.18s var(--ease-snap),
+    box-shadow 0.18s var(--ease-snap),
+    background 0.18s ease,
+    color 0.18s ease;
+}
+.choice.active {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.32);
+}
+
+/* Pratique : cartes plus vivantes au survol, sans modifier les contenus. */
+.practice-grid article {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.28s var(--ease-out-expo),
+    box-shadow 0.28s var(--ease-out-expo);
+}
+.practice-grid article::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  aspect-ratio: 1;
+  right: -110px;
+  top: -110px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.18;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.practice-grid article:hover {
+  z-index: 2;
+  transform: translateY(-8px) rotate(-0.35deg);
+  box-shadow: 8px 8px 0 var(--paper);
+}
+.practice-grid article:hover::after {
+  transform: scale(1.3);
+}
+
+/* Projets : plus de profondeur, reflets dynamiques et CTA plus lisibles. */
+.project {
+  position: relative;
+}
+.project-copy {
+  position: relative;
+  z-index: 2;
+}
+.project-copy::before {
+  content: "";
+  position: absolute;
+  left: max(18px, calc((100vw - var(--max)) / 2 + 18px));
+  top: 12%;
+  bottom: 12%;
+  width: 2px;
+  background: currentColor;
+  opacity: 0.2;
+}
+.project-copy h3 {
+  position: relative;
+  text-shadow: 0 0 0 currentColor;
+  transition:
+    transform 0.28s var(--ease-out-expo),
+    text-shadow 0.28s var(--ease-out-expo);
+}
+.project:hover .project-copy h3 {
+  transform: translateX(8px);
+  text-shadow: -5px 5px 0 rgba(17, 17, 15, 0.16);
+}
+.project-actions a,
+.project-actions button {
+  position: relative;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    opacity 0.2s ease;
+}
+.project-actions a:hover,
+.project-actions button:hover {
+  transform: translateX(5px);
+}
+.scope-visual,
+.visualizer,
+.game-visual {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.28s var(--ease-out-expo),
+    filter 0.28s ease;
+}
+.project:hover :is(.scope-visual, .visualizer, .game-visual) {
+  box-shadow: 16px 16px 0 var(--ink);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+/* Méthode / parcours : lecture plus guidée. */
+.method-rail article {
+  isolation: isolate;
+}
+.method-rail article h3 {
+  transition: transform 0.25s var(--ease-out-expo);
+}
+.method-rail article:hover h3,
+.method-rail article:focus-visible h3 {
+  transform: translateX(5px);
+}
+.timeline article {
+  position: relative;
+  transition:
+    padding-left 0.24s var(--ease-out-expo),
+    background 0.2s ease;
+}
+.timeline article::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--blue);
+  transform: translateY(-50%);
+  transition: width 0.25s var(--ease-out-expo);
+}
+.timeline article:hover {
+  padding-left: 18px;
+  background: rgba(244, 221, 53, 0.25);
+}
+.timeline article:hover::before {
+  width: 10px;
+}
+
+/* Contact final : mouvement graphique sans gêner la lisibilité. */
+.contact {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(70vw, 920px);
+  aspect-ratio: 1;
+  right: -18%;
+  bottom: -70%;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  opacity: 0.14;
+  box-shadow: 0 0 0 70px rgba(17, 17, 15, 0.04), 0 0 0 140px rgba(17, 17, 15, 0.025);
+}
+.contact > a {
+  position: relative;
+  transition:
+    letter-spacing 0.3s var(--ease-out-expo),
+    padding-left 0.3s var(--ease-out-expo);
+}
+.contact > a:hover {
+  padding-left: 16px;
+  letter-spacing: -0.03em;
+}
+
+/* Révélations : léger décalage contrôlé en JS via --reveal-delay. */
+.reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Motion/accessibilité : tous les enrichissements restent désactivables. */
+.reduce-motion .signal-monitor,
+.reduce-motion .hero,
+.reduce-motion .instrument,
+.reduce-motion .practice-grid article,
+.reduce-motion .project-copy h3,
+.reduce-motion .timeline article,
+.reduce-motion .contact > a {
+  transition: none !important;
+}
+.reduce-motion .hero::after,
+.reduce-motion .practice-grid article::after,
+.reduce-motion .contact::before {
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-monitor,
+  .hero,
+  .instrument,
+  .practice-grid article,
+  .project-copy h3,
+  .timeline article,
+  .contact > a {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .signal-monitor {
+    min-width: 164px;
+  }
+  .hero::before {
+    mask-image: linear-gradient(to bottom, black, transparent 80%);
+  }
+  .hero::after {
+    width: 640px;
+    right: -300px;
+  }
+}
+
+@media (max-width: 720px) {
+  body::before {
+    opacity: 0.018;
+  }
+  .signal-monitor {
+    right: 10px;
+    bottom: 10px;
+    min-width: 0;
+    grid-template-columns: auto auto;
+    padding: 7px 9px;
+  }
+  .signal-monitor-section {
+    display: none;
+  }
+  .signal-monitor-progress {
+    min-width: 34px;
+  }
+  .hero-copy::before {
+    top: -24px;
+  }
+  .hero::after {
+    width: 430px;
+    right: -270px;
+    top: 14%;
+  }
+  .hero-meta {
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+  .sequence-strip {
+    gap: 2px;
+  }
+  .sequence-step {
+    height: 6px;
+  }
+  .controls .randomize {
+    order: 2;
+  }
+  .section-heading::before,
+  .manifesto::before,
+  .path::before {
+    left: 18px;
+    top: 54px;
+    width: 28px;
+    box-shadow: 34px 0 0 var(--coral), 68px 0 0 var(--lime);
+  }
+  .project-copy::before {
+    display: none;
+  }
+  .practice-grid article:hover,
+  .project:hover .project-copy h3,
+  .timeline article:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) {
+  html.menu-open,
+  html.menu-open body {
+    overflow: hidden;
+  }
+  .mobile-nav.open {
+    max-height: calc(100svh - 64px);
+    overflow-y: auto;
+    box-shadow: 0 12px 0 rgba(17, 17, 15, 0.08);
+  }
+}

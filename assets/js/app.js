@@ -5,9 +5,7 @@
   const { copyToClipboard, preference } = window.PortfolioUtils;
 
   const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [
-    ...root.querySelectorAll(selector),
-  ];
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
   const html = document.documentElement;
   const languageButton = $("#lang-toggle");
@@ -76,16 +74,13 @@
     html.lang = currentLang;
 
     translatable.forEach((element) => {
-      element.innerHTML =
-        currentLang === "en" ? element.dataset.en : element.dataset.fr;
+      element.innerHTML = currentLang === "en" ? element.dataset.en : element.dataset.fr;
     });
 
     labelled.forEach((element) => {
       element.setAttribute(
         "aria-label",
-        currentLang === "en"
-          ? element.dataset.labelEn
-          : element.dataset.labelFr,
+        currentLang === "en" ? element.dataset.labelEn : element.dataset.labelFr,
       );
     });
 
@@ -171,7 +166,12 @@
 
   contrastButton?.addEventListener("click", () => {
     const enabled = contrastButton.getAttribute("aria-pressed") !== "true";
-    applyToggle(contrastButton, "high-contrast", "portfolio-contrast", enabled);
+    applyToggle(
+      contrastButton,
+      "high-contrast",
+      "portfolio-contrast",
+      enabled,
+    );
   });
 
   motionButton?.addEventListener("click", () => {
@@ -195,16 +195,25 @@
   );
   applyLanguage(currentLang);
 
+  function setMobileMenu(open) {
+    mobileNav?.classList.toggle("open", open);
+    menuButton?.setAttribute("aria-expanded", String(open));
+    html.classList.toggle("menu-open", open);
+  }
+
   menuButton?.addEventListener("click", () => {
-    const open = mobileNav?.classList.toggle("open") || false;
-    menuButton.setAttribute("aria-expanded", String(open));
+    setMobileMenu(!(mobileNav?.classList.contains("open") || false));
   });
 
   $$(".mobile-nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileNav?.classList.remove("open");
-      menuButton?.setAttribute("aria-expanded", "false");
-    });
+    link.addEventListener("click", () => setMobileMenu(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && mobileNav?.classList.contains("open")) {
+      setMobileMenu(false);
+      menuButton?.focus();
+    }
   });
 
   // Ticker infini : construit deux groupes identiques et suffisamment longs
@@ -214,9 +223,7 @@
   const tickerGroup = $(".ticker-group");
 
   if (ticker && tickerTrack && tickerGroup) {
-    const seedNodes = [...tickerGroup.children].map((node) =>
-      node.cloneNode(true),
-    );
+    const seedNodes = [...tickerGroup.children].map((node) => node.cloneNode(true));
     let resizeFrame;
 
     function appendTickerSeed(target) {
@@ -224,17 +231,14 @@
     }
 
     function buildTicker() {
-      tickerTrack
-        .querySelectorAll(".ticker-group[aria-hidden='true']")
-        .forEach((group) => group.remove());
+      tickerTrack.querySelectorAll(".ticker-group[aria-hidden='true']").forEach((group) => group.remove());
       tickerGroup.replaceChildren();
       appendTickerSeed(tickerGroup);
 
       // On dépasse volontairement la largeur visible pour garantir une couverture
       // continue même pendant les redimensionnements et sur les grands écrans.
       const minimumWidth = Math.max(ticker.clientWidth * 1.25, 900);
-      while (tickerGroup.scrollWidth < minimumWidth)
-        appendTickerSeed(tickerGroup);
+      while (tickerGroup.scrollWidth < minimumWidth) appendTickerSeed(tickerGroup);
 
       const clone = tickerGroup.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
@@ -247,28 +251,78 @@
 
     buildTicker();
 
-    window.addEventListener(
-      "resize",
-      () => {
-        cancelAnimationFrame(resizeFrame);
-        resizeFrame = requestAnimationFrame(buildTicker);
-      },
-      { passive: true },
-    );
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(buildTicker);
+    }, { passive: true });
   }
 
   const progress = $(".reading-progress span");
+  const topbar = $(".topbar");
+  const signalSection = $("#signal-section");
+  const signalProgress = $("#signal-progress");
+  const hero = $(".hero");
+  let activeSignalSection = "top";
 
-  function updateProgress() {
-    if (!progress) return;
+  const signalLabels = {
+    top: { fr: "Intro", en: "Intro" },
+    profil: { fr: "Profil", en: "Profile" },
+    mix: { fr: "Mix", en: "Mix" },
+    studio: { fr: "Studio", en: "Studio" },
+    projets: { fr: "Projets", en: "Projects" },
+    methode: { fr: "Méthode", en: "Method" },
+    parcours: { fr: "Parcours", en: "Journey" },
+    contact: { fr: "Contact", en: "Contact" },
+  };
 
-    const available = html.scrollHeight - window.innerHeight;
-    const ratio = available > 0 ? window.scrollY / available : 0;
-    progress.style.width = `${ratio * 100}%`;
+  function updateSignalLabel() {
+    if (!signalSection) return;
+    const labels = signalLabels[activeSignalSection] || signalLabels.top;
+    signalSection.textContent = labels[currentLang] || labels.fr;
   }
 
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
+  function updatePageChrome() {
+    const available = html.scrollHeight - window.innerHeight;
+    const ratio = available > 0 ? Math.min(1, Math.max(0, window.scrollY / available)) : 0;
+
+    if (progress) progress.style.width = `${ratio * 100}%`;
+    if (signalProgress) signalProgress.textContent = `${Math.round(ratio * 100)}%`;
+    topbar?.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+
+  window.addEventListener("scroll", updatePageChrome, { passive: true });
+  updatePageChrome();
+
+  const signalTargets = Object.keys(signalLabels)
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window) {
+    const signalObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible?.target?.id) return;
+        activeSignalSection = visible.target.id;
+        updateSignalLabel();
+      },
+      { rootMargin: "-24% 0px -58%", threshold: [0, 0.1, 0.35, 0.65] },
+    );
+    signalTargets.forEach((target) => signalObserver.observe(target));
+  }
+
+  languageHooks.push(updateSignalLabel);
+  updateSignalLabel();
+
+  if (hero && window.matchMedia("(pointer: fine)").matches) {
+    hero.addEventListener("pointermove", (event) => {
+      if (html.classList.contains("reduce-motion")) return;
+      const rect = hero.getBoundingClientRect();
+      hero.style.setProperty("--pointer-x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+      hero.style.setProperty("--pointer-y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+    });
+  }
 
   const navLinks = $$(".desktop-nav a");
   const navTargets = navLinks
@@ -397,9 +451,7 @@
 
       if (target) {
         $(target)?.scrollIntoView({
-          behavior: html.classList.contains("reduce-motion")
-            ? "auto"
-            : "smooth",
+          behavior: html.classList.contains("reduce-motion") ? "auto" : "smooth",
         });
       }
     });
@@ -416,6 +468,9 @@
   });
 
   const reveals = $$(".reveal");
+  reveals.forEach((element, index) => {
+    element.style.setProperty("--reveal-delay", `${(index % 3) * 70}ms`);
+  });
 
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
@@ -435,7 +490,9 @@
   const instrument = $(".instrument");
   const pads = $$(".pad");
   const screenLabel = $("#screen-label");
+  const sequenceStrip = $("#sequence-strip");
   const playButton = $("#play");
+  const randomizeButton = $("#randomize");
   const clearButton = $("#clear");
   const tempo = $("#tempo");
   const waveform = $("#waveform");
@@ -445,6 +502,23 @@
   let sequence = [];
   let timer;
   let step = 0;
+  const sequenceSteps = [];
+
+  if (sequenceStrip) {
+    for (let index = 0; index < 16; index += 1) {
+      const indicator = document.createElement("span");
+      indicator.className = "sequence-step";
+      sequenceStrip.append(indicator);
+      sequenceSteps.push(indicator);
+    }
+  }
+
+  function updateSequenceStrip(activeIndex = -1) {
+    sequenceSteps.forEach((indicator, index) => {
+      indicator.classList.toggle("filled", index < sequence.length);
+      indicator.classList.toggle("current", index === activeIndex);
+    });
+  }
 
   function context() {
     audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
@@ -485,6 +559,7 @@
       if (screenLabel) {
         screenLabel.textContent += ` · ${sequence.length} ${uiText[currentLang].steps}`;
       }
+      updateSequenceStrip();
     }
   }
 
@@ -499,6 +574,7 @@
     }
 
     instrument?.classList.remove("playing");
+    updateSequenceStrip();
   }
 
   function play() {
@@ -509,10 +585,13 @@
 
     if (!sequence.length) {
       sequence = pads.filter((_, index) => [0, 2, 4, 7].includes(index));
+      updateSequenceStrip();
     }
 
     const beat = () => {
-      tone(sequence[step % sequence.length], false);
+      const activeIndex = step % sequence.length;
+      tone(sequence[activeIndex], false);
+      updateSequenceStrip(activeIndex);
       step += 1;
     };
 
@@ -552,9 +631,19 @@
 
   playButton?.addEventListener("click", play);
 
+  randomizeButton?.addEventListener("click", () => {
+    stop();
+    sequence = Array.from({ length: 8 }, () => pads[Math.floor(Math.random() * pads.length)]).filter(Boolean);
+    updateSequenceStrip();
+    if (screenLabel) {
+      screenLabel.textContent = currentLang === "en" ? "Random pattern · 8 steps" : "Motif aléatoire · 8 pas";
+    }
+  });
+
   clearButton?.addEventListener("click", () => {
     stop();
     sequence = [];
+    updateSequenceStrip();
     if (screenLabel) screenLabel.textContent = uiText[currentLang].cleared;
   });
 
@@ -595,15 +684,13 @@
   }
 
   filterButtons.forEach((button) => {
-    button.addEventListener("click", () =>
-      filterProjects(button.dataset.filter),
-    );
+    button.addEventListener("click", () => filterProjects(button.dataset.filter));
   });
 
   languageHooks.push(() => {
     const activeFilter =
-      filterButtons.find((button) => button.classList.contains("active"))
-        ?.dataset.filter || "all";
+      filterButtons.find((button) => button.classList.contains("active"))?.dataset
+        .filter || "all";
     filterProjects(activeFilter);
   });
 
@@ -805,8 +892,7 @@
   tourTrigger?.addEventListener("click", openTour);
 
   mobileTourTrigger?.addEventListener("click", () => {
-    mobileNav?.classList.remove("open");
-    menuButton?.setAttribute("aria-expanded", "false");
+    setMobileMenu(false);
     openTour();
   });
 
@@ -838,7 +924,7 @@
   });
 
   if (window.matchMedia("(pointer: fine)").matches) {
-    $$("[data-tilt]").forEach((element) => {
+    $$('[data-tilt]').forEach((element) => {
       element.addEventListener("pointermove", (event) => {
         if (html.classList.contains("reduce-motion")) return;
 
@@ -887,7 +973,7 @@
     if (caseLink) caseLink.href = entry.link;
   }
 
-  $$("[data-case]").forEach((button) => {
+  $$('[data-case]').forEach((button) => {
     button.addEventListener("click", () => {
       if (!cases[button.dataset.case]) return;
 

@@ -1,54 +1,29 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Nathan Chambrette croisées interactives entre code et gros son."
-    />
-    <meta name="theme-color" content="#f4f0e8" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Nathan Chambrette — Code, son & lu" />
-    <meta
-      property="og:description"
-      content="Développeur créatif et technicien audio. Outils, jeux et expériences interactives."
-    />
-    <meta
-      property="og:url"
-      content="https://lehomar2vinci.github.io/Portfolio/"
-    />
-    <link rel="canonical" href="https://lehomar2vinci.github.io/Portfolio/" />
-    <title>Nathan Chambrette — Code, son et bidouillages</title>
-    <link rel="stylesheet" href="assets/css/index.css" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Nathan Chambrette",
-        "url": "https://lehomar2vinci.github.io/Portfolio/",
-        "jobTitle": "Développeur créatif et technicien audio",
-        "sameAs": [
-          "https://github.com/Lehomar2vinci",
-          "https://www.linkedin.com/in/nathan-chambrette-985862b7",
-          "https://lehomar2vinci.itch.io/"
-        ],
-        "knowsAbout": [
-          "Creative coding",
-          "Sound design",
-          "Unity",
-          "C#",
-          "Python",
-          "Web Audio"
-        ]
-      }
-    </script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main" data-en="Skip to content"
-      >Aller au contenu</a
-    >
-    <div class="reading-progress" aria-hidden="true"><span></span></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Nathan Chambrette conçoit des expériences interactives à la croisée du code, du son et de l’accessibilité.">
+  <meta name="theme-color" content="#f4f0e8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nathan Chambrette — Code, son & interactions">
+  <meta property="og:description" content="Développeur créatif et technicien audio. Outils, jeux et expériences interactives.">
+  <meta property="og:url" content="https://lehomar2vinci.github.io/Portfolio/">
+  <link rel="canonical" href="https://lehomar2vinci.github.io/Portfolio/">
+  <title>Nathan Chambrette — Code, son et bidouillages</title>
+  <link rel="stylesheet" href="assets/css/index.css">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Person","name":"Nathan Chambrette","url":"https://lehomar2vinci.github.io/Portfolio/","jobTitle":"Développeur créatif et technicien audio","sameAs":["https://github.com/Lehomar2vinci","https://www.linkedin.com/in/nathan-chambrette-985862b7","https://lehomar2vinci.itch.io/"],"knowsAbout":["Creative coding","Sound design","Unity","C#","Python","Web Audio"]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content">Aller au contenu</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <aside class="signal-monitor" aria-label="Progression dans la page" data-label-en="Page progress">
+    <span class="signal-monitor-dot" aria-hidden="true"></span>
+    <span class="signal-monitor-section" id="signal-section">INTRO</span>
+    <span class="signal-monitor-progress" id="signal-progress">0%</span>
+  </aside>
 
     <header class="topbar">
       <a class="wordmark" href="#top" aria-label="Nathan Chambrette, accueil">
@@ -67,215 +42,62 @@
         <a href="#parcours" data-en="Journey">Parcours</a>
       </nav>
       <div class="top-actions">
-        <button
-          class="tour-trigger"
-          id="tour-trigger"
-          type="button"
-          aria-haspopup="dialog"
-          aria-controls="tour-dialog"
-          data-en="Tour"
-        >
-          Visite
-        </button>
-        <button
-          class="command-trigger"
-          id="command-trigger"
-          type="button"
-          aria-haspopup="dialog"
-          aria-controls="command-dialog"
-          data-en="Go to… <kbd>⌘K</kbd>"
-        >
-          Aller à… <kbd>⌘K</kbd>
-        </button>
-        <div
-          class="preference-tools"
-          aria-label="Préférences d’affichage"
-          data-label-en="Display preferences"
-        >
-          <button
-            class="pref-button"
-            id="lang-toggle"
-            type="button"
-            aria-label="Afficher le site en anglais"
-          >
-            EN
-          </button>
-          <button
-            class="pref-button palette-button"
-            id="palette-toggle"
-            type="button"
-            aria-label="Changer la palette visuelle"
-            data-label-en="Change visual palette"
-          >
-            SIGNAL
-          </button>
-          <button
-            class="pref-button"
-            id="contrast-toggle"
-            type="button"
-            aria-pressed="false"
-            aria-label="Activer le contraste renforcé"
-            data-label-en="Enable enhanced contrast"
-          >
-            A11Y
-          </button>
-          <button
-            class="pref-button motion-button"
-            id="motion-toggle"
-            type="button"
-            aria-pressed="false"
-            aria-label="Réduire les animations"
-            data-label-en="Reduce motion"
-          >
-            MOTION
-          </button>
+        <button class="tour-trigger" id="tour-trigger" type="button" aria-haspopup="dialog" aria-controls="tour-dialog" data-en="Tour">Visite</button>
+        <button class="command-trigger" id="command-trigger" type="button" aria-haspopup="dialog" aria-controls="command-dialog" data-en="Go to… <kbd>⌘K</kbd>">Aller à… <kbd>⌘K</kbd></button>
+        <div class="preference-tools" aria-label="Préférences d’affichage" data-label-en="Display preferences">
+          <button class="pref-button" id="lang-toggle" type="button" aria-label="Afficher le site en anglais">EN</button>
+          <button class="pref-button palette-button" id="palette-toggle" type="button" aria-label="Changer la palette visuelle" data-label-en="Change visual palette">SIGNAL</button>
+          <button class="pref-button" id="contrast-toggle" type="button" aria-pressed="false" aria-label="Activer le contraste renforcé" data-label-en="Enable enhanced contrast">A11Y</button>
+          <button class="pref-button motion-button" id="motion-toggle" type="button" aria-pressed="false" aria-label="Réduire les animations" data-label-en="Reduce motion">MOTION</button>
         </div>
-        <a
-          class="contact-pill"
-          href="mailto:n.chambrette@gmail.com"
-          data-en="Write to me <span aria-hidden='true'>↗</span>"
-          >Écrivez-moi <span aria-hidden="true">↗</span></a
-        >
+        <a class="contact-pill" href="mailto:n.chambrette@gmail.com" data-en="Write to me <span aria-hidden='true'>↗</span>">Écrivez-moi <span aria-hidden="true">↗</span></a>
       </div>
-      <button
-        class="menu-button"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        Menu
-      </button>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
       <nav class="mobile-nav" id="mobile-menu" aria-label="Navigation mobile">
-        <a href="#projets" data-en="Projects">Projets</a
-        ><a href="#profil" data-en="About">À propos</a><a href="#mix">Mix</a
-        ><a href="#studio">Studio</a
-        ><a href="#methode" data-en="Method">Méthode</a
-        ><a href="#parcours" data-en="Journey">Parcours</a
-        ><button type="button" id="mobile-tour-trigger" data-en="Guided tour">
-          Visite guidée</button
-        ><a href="mailto:n.chambrette@gmail.com">Contact</a>
+        <a href="#projets" data-en="Projects">Projets</a><a href="#profil" data-en="About">À propos</a><a href="#mix">Mix</a><a href="#studio">Studio</a><a href="#methode" data-en="Method">Méthode</a><a href="#parcours" data-en="Journey">Parcours</a><button type="button" id="mobile-tour-trigger" data-en="Guided tour">Visite guidée</button><a href="mailto:n.chambrette@gmail.com">Contact</a>
       </nav>
     </header>
 
     <main id="main">
       <section class="hero" id="top" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p
-            class="kicker"
-            data-en="<span class='status-dot'></span> Creative code · Audio · Interaction"
-          >
-            <span class="status-dot"></span> Code créatif · Audio · Interaction
-          </p>
+          <p class="kicker" data-en="<span class='status-dot'></span> Creative code · Audio · Interaction"><span class="status-dot"></span> Code créatif · Audio · Interaction</p>
           <h1 id="hero-title">Nathan<br /><em>Chambrette</em></h1>
-          <p class="hero-tagline" data-en="I give sound to ideas.">
-            Je donne du son aux idées.
-          </p>
-          <p
-            class="hero-intro"
-            data-en="Creative developer and audio technician based in Nancy, I build tools, games and experiences designed to be seen as much as heard."
-          >
-            Développeur créatif et technicien audio à Nancy, je fabrique des
-            outils, des jeux et des expériences qui se regardent autant qu’ils
-            s’écoutent.
-          </p>
-          <a
-            class="round-link"
-            href="#projets"
-            data-en="Explore things <span aria-hidden='true'>↓</span>"
-            >Explorer les trucs <span aria-hidden="true">↓</span></a
-          >
+          <p class="hero-tagline" data-en="I give sound to ideas.">Je donne du son aux idées.</p>
+          <p class="hero-intro" data-en="Creative developer and audio technician based in Nancy, I build tools, games and experiences designed to be seen as much as heard.">Développeur créatif et technicien audio à Nancy, je fabrique des outils, des jeux et des expériences qui se regardent autant qu’ils s’écoutent.</p>
+          <div class="hero-meta" aria-label="Repères rapides" data-label-en="Quick facts">
+            <span data-en="Available · Nancy">Disponible · Nancy</span>
+            <span>Web · Unity · Audio</span>
+            <span data-en="Creative development">Développement créatif</span>
+          </div>
+          <a class="round-link" href="#projets" data-en="Explore things <span aria-hidden='true'>↓</span>">Explorer les trucs <span aria-hidden="true">↓</span></a>
         </div>
 
-        <div
-          class="instrument"
-          role="group"
-          aria-label="Séquenceur sonore interactif"
-          data-label-en="Interactive sound sequencer"
-          data-tilt
-        >
-          <div class="instrument-head">
-            <span>NC—01</span><strong>IDEA MACHINE</strong
-            ><span id="bpm-label">96 BPM</span>
-          </div>
+        <div class="instrument" role="group" aria-label="Séquenceur sonore interactif" data-label-en="Interactive sound sequencer" data-tilt>
+          <div class="instrument-head"><span>NC—01</span><strong>IDEA MACHINE</strong><span id="bpm-label">96 BPM</span></div>
           <div class="screen" aria-live="polite">
-            <div class="wave" aria-hidden="true">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i
-              ><i></i><i></i><i></i>
-            </div>
-            <p
-              id="screen-label"
-              data-en="Tap the pads to compose and eventualy laugh as a duck"
-            >
-              Touchez les pads pour composer et se marrer
-            </p>
+            <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p id="screen-label" data-en="Tap the pads to compose and eventualy laugh as a duck">Touchez les pads pour composer et se marrer</p>
           </div>
+          <div class="sequence-strip" id="sequence-strip" aria-hidden="true"></div>
           <div class="controls">
-            <button
-              class="transport"
-              id="play"
-              type="button"
-              aria-pressed="false"
-              data-en="<span aria-hidden='true'>▶</span> Play"
-            >
-              <span aria-hidden="true">▶</span> Jouer
-            </button>
-            <label
-              >Tempo
-              <input id="tempo" type="range" min="70" max="140" value="96"
-            /></label>
-            <label
-              ><span data-en="Tone">Timbre</span>
-              <select id="waveform" aria-label="Timbre" data-label-en="Tone">
-                <option value="triangle">Triangle</option>
-                <option value="sine">Sinus</option>
-                <option value="square">Carré</option>
-                <option value="sawtooth">Scie</option>
-              </select></label
-            >
-            <button
-              class="transport clear"
-              id="clear"
-              type="button"
-              data-en="Clear"
-            >
-              Effacer
-            </button>
+            <button class="transport" id="play" type="button" aria-pressed="false" data-en="<span aria-hidden='true'>▶</span> Play"><span aria-hidden="true">▶</span> Jouer</button>
+            <label>Tempo <input id="tempo" type="range" min="70" max="140" value="96" /></label>
+            <label><span data-en="Tone">Timbre</span> <select id="waveform" aria-label="Timbre" data-label-en="Tone"><option value="triangle">Triangle</option><option value="sine">Sinus</option><option value="square">Carré</option><option value="sawtooth">Scie</option></select></label>
+            <button class="transport randomize" id="randomize" type="button" data-en="Random">Aléatoire</button>
+            <button class="transport clear" id="clear" type="button" data-en="Clear">Effacer</button>
           </div>
-          <div
-            class="pad-grid"
-            id="pad-grid"
-            role="group"
-            aria-label="8 pads sonores"
-            data-label-en="8 sound pads"
-          >
-            <button class="pad coral" data-note="261.63" data-key="A">
-              <b>A</b><span>DO</span>
-            </button>
-            <button class="pad cream" data-note="293.66" data-key="Z">
-              <b>Z</b><span>RÉ</span>
-            </button>
-            <button class="pad blue" data-note="329.63" data-key="E">
-              <b>E</b><span>MI</span>
-            </button>
-            <button class="pad lime" data-note="349.23" data-key="R">
-              <b>R</b><span>FA</span>
-            </button>
-            <button class="pad lime" data-note="392.00" data-key="Q">
-              <b>Q</b><span>SOL</span>
-            </button>
-            <button class="pad blue" data-note="440.00" data-key="S">
-              <b>S</b><span>LA</span>
-            </button>
-            <button class="pad cream" data-note="493.88" data-key="D">
-              <b>D</b><span>SI</span>
-            </button>
-            <button class="pad coral" data-note="523.25" data-key="F">
-              <b>F</b><span>DO+</span>
-            </button>
+          <div class="pad-grid" id="pad-grid" role="group" aria-label="8 pads sonores" data-label-en="8 sound pads">
+            <button class="pad coral" data-note="261.63" data-key="A"><b>A</b><span>DO</span></button>
+            <button class="pad cream" data-note="293.66" data-key="Z"><b>Z</b><span>RÉ</span></button>
+            <button class="pad blue" data-note="329.63" data-key="E"><b>E</b><span>MI</span></button>
+            <button class="pad lime" data-note="349.23" data-key="R"><b>R</b><span>FA</span></button>
+            <button class="pad lime" data-note="392.00" data-key="Q"><b>Q</b><span>SOL</span></button>
+            <button class="pad blue" data-note="440.00" data-key="S"><b>S</b><span>LA</span></button>
+            <button class="pad cream" data-note="493.88" data-key="D"><b>D</b><span>SI</span></button>
+            <button class="pad coral" data-note="523.25" data-key="F"><b>F</b><span>DO+</span></button>
           </div>
-          <p class="instrument-note" data-en="Keyboard A Z E R · Q S D F">
-            Clavier A Z E R · Q S D F
-          </p>
+          <p class="instrument-note" data-en="Keyboard A Z E R · Q S D F">Clavier A Z E R · Q S D F</p>
         </div>
       </section>
 
@@ -292,955 +114,110 @@
 
       <section class="manifesto" id="profil">
         <p class="section-index" data-en="01 — Profile">01 — Profil</p>
-        <h2
-          data-en="Between the control room and the code editor, I look for the same spark: making an interaction <span>obvious</span>, alive and memorable."
-        >
-          Entre la régie et l’éditeur de code, je cherche le même déclic&nbsp;:
-          rendre une interaction <span>évidente</span>, vivante et mémorable.
-        </h2>
+        <h2 data-en="Between the control room and the code editor, I look for the same spark: making an interaction <span>obvious</span>, alive and memorable.">Entre la régie et l’éditeur de code, je cherche le même déclic&nbsp;: rendre une interaction <span>évidente</span>, vivante et mémorable.</h2>
         <div class="manifesto-grid">
-          <p
-            data-en="Live performance taught me listening, rhythm and reliability. Development now lets me turn those instincts into digital products."
-          >
-            Ma culture du spectacle vivant m’a appris l’écoute, le rythme et la
-            fiabilité. Le développement me permet aujourd’hui de transformer ces
-            réflexes en produits numériques.
-          </p>
-          <ul
-            aria-label="Domaines d'expertise"
-            data-label-en="Areas of expertise"
-          >
-            <li data-en="<span>01</span> C# & Python development">
-              <span>01</span> Développement C# Python & Langages Web
-            </li>
-            <li data-en="<span>02</span> Unity, audio & interactivity">
-              <span>02</span> Unity, audio & interactivité
-            </li>
-            <li data-en="<span>03</span> UX & accessibility">
-              <span>03</span> UX & accessibilité
-            </li>
-            <li data-en="<span>04</span> Live sound & production">
-              <span>04</span> Sonorisation & direct
-            </li>
+          <p data-en="Live performance taught me listening, rhythm and reliability. Development now lets me turn those instincts into digital products.">Ma culture du spectacle vivant m’a appris l’écoute, le rythme et la fiabilité. Le développement me permet aujourd’hui de transformer ces réflexes en produits numériques.</p>
+          <ul aria-label="Domaines d'expertise" data-label-en="Areas of expertise">
+            <li data-en="<span>01</span> C# & Python development"><span>01</span> Développement C# Python & Langages Web</li>
+            <li data-en="<span>02</span> Unity, audio & interactivity"><span>02</span> Unity, audio & interactivité</li>
+            <li data-en="<span>03</span> UX & accessibility"><span>03</span> UX & accessibilité</li>
+            <li data-en="<span>04</span> Live sound & production"><span>04</span> Sonorisation & direct</li>
           </ul>
         </div>
       </section>
 
       <section class="skill-mixer" id="mix" aria-labelledby="mix-title">
-        <div class="section-heading">
-          <p class="section-index" data-en="02 — Skill mix">
-            02 — Mix compétences
-          </p>
-          <h2 id="mix-title" data-en="Adjust the<br>working signal">
-            Ajuster le<br />signal de travail
-          </h2>
-        </div>
+        <div class="section-heading"><p class="section-index" data-en="02 — Skill mix">02 — Mix compétences</p><h2 id="mix-title" data-en="Adjust the<br>working signal">Ajuster le<br />signal de travail</h2></div>
         <div class="mixer-board">
-          <div
-            class="mixer-console"
-            aria-label="Mixeur de compétences"
-            data-label-en="Skill mixer"
-          >
-            <label
-              ><span>Code <b data-skill-value="code">86%</b></span
-              ><input
-                class="skill-range"
-                type="range"
-                min="0"
-                max="100"
-                value="86"
-                data-skill="code"
-                aria-label="Code"
-            /></label>
-            <label
-              ><span>Audio <b data-skill-value="audio">78%</b></span
-              ><input
-                class="skill-range"
-                type="range"
-                min="0"
-                max="100"
-                value="78"
-                data-skill="audio"
-                aria-label="Audio"
-            /></label>
-            <label
-              ><span>UX <b data-skill-value="ux">74%</b></span
-              ><input
-                class="skill-range"
-                type="range"
-                min="0"
-                max="100"
-                value="74"
-                data-skill="ux"
-                aria-label="UX"
-            /></label>
-            <label
-              ><span>Live <b data-skill-value="live">68%</b></span
-              ><input
-                class="skill-range"
-                type="range"
-                min="0"
-                max="100"
-                value="68"
-                data-skill="live"
-                aria-label="Live"
-            /></label>
+          <div class="mixer-console" aria-label="Mixeur de compétences" data-label-en="Skill mixer">
+            <label><span>Code <b data-skill-value="code">86%</b></span><input class="skill-range" type="range" min="0" max="100" value="86" data-skill="code" aria-label="Code" /></label>
+            <label><span>Audio <b data-skill-value="audio">78%</b></span><input class="skill-range" type="range" min="0" max="100" value="78" data-skill="audio" aria-label="Audio" /></label>
+            <label><span>UX <b data-skill-value="ux">74%</b></span><input class="skill-range" type="range" min="0" max="100" value="74" data-skill="ux" aria-label="UX" /></label>
+            <label><span>Live <b data-skill-value="live">68%</b></span><input class="skill-range" type="range" min="0" max="100" value="68" data-skill="live" aria-label="Live" /></label>
           </div>
           <aside class="mixer-output" aria-live="polite">
-            <p class="brief-label" data-en="Current signal">Signal courant</p>
-            <h3 id="mix-headline"></h3>
-            <p id="mix-description"></p>
-            <dl class="mix-stats">
-              <div>
-                <dt data-en="Dominant">Dominante</dt>
-                <dd id="mix-dominant">Code</dd>
-              </div>
-              <div>
-                <dt data-en="Intensity">Intensité</dt>
-                <dd id="mix-average">77%</dd>
-              </div>
-            </dl>
-            <div class="mix-bars" aria-hidden="true">
-              <i style="--h: 86%"></i><i style="--h: 78%"></i
-              ><i style="--h: 74%"></i><i style="--h: 68%"></i>
-            </div>
-            <button type="button" id="mix-reset" data-en="Reset balance">
-              Réinitialiser
-            </button>
+            <p class="brief-label" data-en="Current signal">Signal courant</p><h3 id="mix-headline"></h3><p id="mix-description"></p>
+            <dl class="mix-stats"><div><dt data-en="Dominant">Dominante</dt><dd id="mix-dominant">Code</dd></div><div><dt data-en="Intensity">Intensité</dt><dd id="mix-average">77%</dd></div></dl>
+            <div class="mix-bars" aria-hidden="true"><i style="--h: 86%"></i><i style="--h: 78%"></i><i style="--h: 74%"></i><i style="--h: 68%"></i></div>
+            <button type="button" id="mix-reset" data-en="Reset balance">Réinitialiser</button>
           </aside>
         </div>
       </section>
 
       <section class="practice" aria-labelledby="practice-title">
-        <div class="section-heading">
-          <p class="section-index" data-en="03 — Practice">03 — Pratique</p>
-          <h2 id="practice-title" data-en="What I set<br>in motion">
-            Ce que je<br />mets en mouvement
-          </h2>
-        </div>
+        <div class="section-heading"><p class="section-index" data-en="03 — Practice">03 — Pratique</p><h2 id="practice-title" data-en="What I set<br>in motion">Ce que je<br />mets en mouvement</h2></div>
         <div class="practice-grid">
-          <article>
-            <span class="practice-icon" aria-hidden="true">◉</span>
-            <p data-en="01 / DESIGN">01 / CONCEVOIR</p>
-            <h3 data-en="Interactive<br>interfaces">
-              Interfaces<br />interactives
-            </h3>
-            <p
-              data-en="Readable, tactile and inclusive interactions, from prototype to application."
-            >
-              Des interactions lisibles, tactiles et inclusives, du prototype à
-              l’application.
-            </p>
-          </article>
-          <article>
-            <span class="practice-icon" aria-hidden="true">≋</span>
-            <p data-en="02 / LISTEN">02 / ÉCOUTER</p>
-            <h3 data-en="Reactive<br>audio">Audio<br />réactif</h3>
-            <p
-              data-en="Sound that drives images, supports action and gives depth to space."
-            >
-              Du son qui pilote l’image, accompagne l’action et donne du relief
-              à l’espace.
-            </p>
-          </article>
-          <article>
-            <span class="practice-icon" aria-hidden="true">⌘</span>
-            <p data-en="03 / BUILD">03 / FABRIQUER</p>
-            <h3 data-en="Creative<br>tools">Outils<br />créatifs</h3>
-            <p
-              data-en="Digital instruments for experimenting, learning and producing differently."
-            >
-              Des instruments numériques pour expérimenter, apprendre et
-              produire autrement.
-            </p>
-          </article>
+          <article><span class="practice-icon" aria-hidden="true">◉</span><p data-en="01 / DESIGN">01 / CONCEVOIR</p><h3 data-en="Interactive<br>interfaces">Interfaces<br />interactives</h3><p data-en="Readable, tactile and inclusive interactions, from prototype to application.">Des interactions lisibles, tactiles et inclusives, du prototype à l’application.</p></article>
+          <article><span class="practice-icon" aria-hidden="true">≋</span><p data-en="02 / LISTEN">02 / ÉCOUTER</p><h3 data-en="Reactive<br>audio">Audio<br />réactif</h3><p data-en="Sound that drives images, supports action and gives depth to space.">Du son qui pilote l’image, accompagne l’action et donne du relief à l’espace.</p></article>
+          <article><span class="practice-icon" aria-hidden="true">⌘</span><p data-en="03 / BUILD">03 / FABRIQUER</p><h3 data-en="Creative<br>tools">Outils<br />créatifs</h3><p data-en="Digital instruments for experimenting, learning and producing differently.">Des instruments numériques pour expérimenter, apprendre et produire autrement.</p></article>
         </div>
       </section>
 
       <section class="studio" id="studio">
-        <div class="section-heading">
-          <p class="section-index" data-en="04 — Interactive studio">
-            04 — Studio interactif
-          </p>
-          <h2 data-en="Compose a<br>project brief">
-            Composer un<br />brief projet
-          </h2>
-        </div>
+        <div class="section-heading"><p class="section-index" data-en="04 — Interactive studio">04 — Studio interactif</p><h2 data-en="Compose a<br>project brief">Composer un<br />brief projet</h2></div>
         <div class="brief-lab" aria-labelledby="brief-title">
           <div class="brief-controls">
-            <h3
-              id="brief-title"
-              data-en="Choose a direction and generate a concrete collaboration angle."
-            >
-              Choisissez une direction et générez un angle de collaboration
-              concret.
-            </h3>
-            <fieldset data-brief-group="goal">
-              <legend data-en="Goal">Objectif</legend>
-              <button
-                type="button"
-                class="choice active"
-                data-value="prototype"
-                data-brief-fr="prototyper un outil sensible"
-                data-brief-en="prototype a sensory tool"
-                data-score="72"
-                data-en="Prototype"
-              >
-                Prototypage
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="audio"
-                data-brief-fr="rendre une expérience réactive au son"
-                data-brief-en="make an experience react to sound"
-                data-score="88"
-                data-en="Audio reactive"
-              >
-                Audio réactif
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="access"
-                data-brief-fr="clarifier un parcours utilisateur accessible"
-                data-brief-en="clarify an accessible user journey"
-                data-score="81"
-                data-en="Accessibility"
-              >
-                Accessibilité
-              </button>
+            <h3 id="brief-title" data-en="Choose a direction and generate a concrete collaboration angle.">Choisissez une direction et générez un angle de collaboration concret.</h3>
+            <fieldset data-brief-group="goal"><legend data-en="Goal">Objectif</legend>
+              <button type="button" class="choice active" data-value="prototype" data-brief-fr="prototyper un outil sensible" data-brief-en="prototype a sensory tool" data-score="72" data-en="Prototype">Prototypage</button>
+              <button type="button" class="choice" data-value="audio" data-brief-fr="rendre une expérience réactive au son" data-brief-en="make an experience react to sound" data-score="88" data-en="Audio reactive">Audio réactif</button>
+              <button type="button" class="choice" data-value="access" data-brief-fr="clarifier un parcours utilisateur accessible" data-brief-en="clarify an accessible user journey" data-score="81" data-en="Accessibility">Accessibilité</button>
             </fieldset>
-            <fieldset data-brief-group="format">
-              <legend>Format</legend>
-              <button
-                type="button"
-                class="choice active"
-                data-value="web"
-                data-brief-fr="sur le web"
-                data-brief-en="on the web"
-                data-score="12"
-              >
-                Web
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="game"
-                data-brief-fr="dans un prototype Unity"
-                data-brief-en="inside a Unity prototype"
-                data-score="18"
-              >
-                Unity
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="tool"
-                data-brief-fr="comme outil interne"
-                data-brief-en="as an internal tool"
-                data-score="16"
-                data-en="Tool"
-              >
-                Outil
-              </button>
+            <fieldset data-brief-group="format"><legend>Format</legend>
+              <button type="button" class="choice active" data-value="web" data-brief-fr="sur le web" data-brief-en="on the web" data-score="12">Web</button>
+              <button type="button" class="choice" data-value="game" data-brief-fr="dans un prototype Unity" data-brief-en="inside a Unity prototype" data-score="18">Unity</button>
+              <button type="button" class="choice" data-value="tool" data-brief-fr="comme outil interne" data-brief-en="as an internal tool" data-score="16" data-en="Tool">Outil</button>
             </fieldset>
-            <fieldset data-brief-group="constraint">
-              <legend data-en="Constraint">Contrainte</legend>
-              <button
-                type="button"
-                class="choice active"
-                data-value="fast"
-                data-brief-fr="avec un prototype testable vite"
-                data-brief-en="with a quickly testable prototype"
-                data-score="7"
-                data-en="Fast test"
-              >
-                Test rapide
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="live"
-                data-brief-fr="avec une logique fiable en direct"
-                data-brief-en="with reliable live behavior"
-                data-score="10"
-                data-en="Live-ready"
-              >
-                Direct
-              </button>
-              <button
-                type="button"
-                class="choice"
-                data-value="clear"
-                data-brief-fr="avec une interface très lisible"
-                data-brief-en="with a very readable interface"
-                data-score="9"
-                data-en="Readable"
-              >
-                Lisible
-              </button>
+            <fieldset data-brief-group="constraint"><legend data-en="Constraint">Contrainte</legend>
+              <button type="button" class="choice active" data-value="fast" data-brief-fr="avec un prototype testable vite" data-brief-en="with a quickly testable prototype" data-score="7" data-en="Fast test">Test rapide</button>
+              <button type="button" class="choice" data-value="live" data-brief-fr="avec une logique fiable en direct" data-brief-en="with reliable live behavior" data-score="10" data-en="Live-ready">Direct</button>
+              <button type="button" class="choice" data-value="clear" data-brief-fr="avec une interface très lisible" data-brief-en="with a very readable interface" data-score="9" data-en="Readable">Lisible</button>
             </fieldset>
           </div>
-          <aside class="brief-output" aria-live="polite">
-            <p class="brief-label" data-en="Generated angle">Angle généré</p>
-            <h3 id="brief-result"></h3>
-            <div class="brief-meter" aria-hidden="true">
-              <span id="brief-meter"></span>
-            </div>
-            <dl>
-              <div>
-                <dt data-en="Energy">Énergie</dt>
-                <dd id="brief-score">91%</dd>
-              </div>
-              <div>
-                <dt data-en="Profile">Profil</dt>
-                <dd id="brief-profile">Code · Audio · UX</dd>
-              </div>
-            </dl>
-            <button
-              type="button"
-              class="brief-copy"
-              id="brief-copy"
-              data-en="Copy this brief"
-            >
-              Copier ce brief
-            </button>
-          </aside>
+          <aside class="brief-output" aria-live="polite"><p class="brief-label" data-en="Generated angle">Angle généré</p><h3 id="brief-result"></h3><div class="brief-meter" aria-hidden="true"><span id="brief-meter"></span></div><dl><div><dt data-en="Energy">Énergie</dt><dd id="brief-score">91%</dd></div><div><dt data-en="Profile">Profil</dt><dd id="brief-profile">Code · Audio · UX</dd></div></dl><button type="button" class="brief-copy" id="brief-copy" data-en="Copy this brief">Copier ce brief</button></aside>
         </div>
       </section>
 
       <section class="work" id="projets">
-        <div class="section-heading">
-          <p class="section-index" data-en="05 — Selected work">
-            05 — Sélection
-          </p>
-          <h2 data-en="Projects on air">Projets en écoute</h2>
-          <div
-            class="filter-bar"
-            aria-label="Filtrer les projets"
-            data-label-en="Filter projects"
-          >
-            <button
-              type="button"
-              class="active"
-              data-filter="all"
-              data-en="All"
-            >
-              Tous</button
-            ><button type="button" data-filter="audio">Audio</button
-            ><button type="button" data-filter="visual" data-en="Visual">
-              Visuel</button
-            ><button type="button" data-filter="game" data-en="Games">
-              Jeux</button
-            ><span id="project-count" aria-live="polite"></span>
-          </div>
-        </div>
-        <article
-          class="project project-blue reveal"
-          data-project-tags="audio visual code"
-        >
-          <div class="project-copy">
-            <p class="project-number" data-en="001 / AUDIO EXPERIENCE">
-              001 / EXPÉRIENCE AUDIO
-            </p>
-            <h3>PestOSC</h3>
-            <p
-              data-en="A p5.js audio-visual instrument. The mouse or touch drives frequency and amplitude while the image degrades, changes color and reveals the signal."
-            >
-              Un instrument audio-visuel p5.js. La souris ou le doigt pilote
-              fréquence et amplitude pendant que l’image se dégrade, change de
-              couleur et révèle le signal.
-            </p>
-            <dl class="project-facts">
-              <div>
-                <dt data-en="Role">Rôle</dt>
-                <dd data-en="Design & development">
-                  Conception & développement
-                </dd>
-              </div>
-              <div>
-                <dt>Tech</dt>
-                <dd>p5.js · Web Audio</dd>
-              </div>
-            </dl>
-            <div class="tags">
-              <span>Instrument</span><span data-en="Real time">Temps réel</span
-              ><span data-en="Visualization">Visualisation</span>
-            </div>
-            <div class="project-actions">
-              <button
-                type="button"
-                data-case="pestosc"
-                data-en="Case study <span aria-hidden='true'>＋</span>"
-              >
-                Fiche projet <span aria-hidden="true">＋</span></button
-              ><a
-                href="https://github.com/Lehomar2vinci/PestOSC"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Voir PestOSC sur GitHub"
-                data-label-en="View PestOSC on GitHub"
-                >GitHub ↗</a
-              ><a
-                href="https://lehomar2vinci.itch.io/pestosc"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Essayer PestOSC"
-                data-label-en="Try PestOSC"
-                >Essayer ! ↗</a
-              >
-            </div>
-          </div>
-          <div class="scope-visual" aria-hidden="true" data-tilt>
-            <div class="scope-grid"></div>
-            <svg viewBox="0 0 800 320" role="img">
-              <path
-                d="M0 165 C45 165 52 78 95 78 S146 245 192 245 S240 42 285 42 S338 276 384 276 S431 92 478 92 S527 225 574 225 S624 129 670 129 S720 165 800 165"
-              />
-            </svg>
-            <div class="scope-dials"><i></i><i></i><i></i></div>
-          </div>
-        </article>
-        <article
-          class="project project-coral reveal"
-          data-project-tags="audio visual code"
-        >
-          <div class="project-copy">
-            <p class="project-number" data-en="002 / AUDIO-VISUAL WEB">
-              002 / WEB AUDIOVISUEL
-            </p>
-            <h3>Pesto<br />Visualizer</h3>
-            <p
-              data-en="A microphone-driven visualizer. Frequencies animate concentric circles and particles, with adjustable palettes and sensitivity."
-            >
-              Un visualiseur piloté par le microphone. Les fréquences animent
-              des cercles concentriques et des particules, avec palettes et
-              sensibilité réglables.
-            </p>
-            <dl class="project-facts">
-              <div>
-                <dt data-en="Input">Entrée</dt>
-                <dd data-en="Real-time microphone">Microphone temps réel</dd>
-              </div>
-              <div>
-                <dt>Tech</dt>
-                <dd>p5.js · p5.sound</dd>
-              </div>
-            </dl>
-            <div class="tags">
-              <span>Microphone</span><span>Particules</span
-              ><span>Creative coding</span>
-            </div>
-            <div class="project-actions">
-              <button
-                type="button"
-                data-case="visualizer"
-                data-en="Case study <span aria-hidden='true'>＋</span>"
-              >
-                Fiche projet <span aria-hidden="true">＋</span></button
-              ><a
-                href="https://github.com/Lehomar2vinci/PestoVIsualizer"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Voir PestoVisualizer sur GitHub"
-                data-label-en="View PestoVisualizer on GitHub"
-                >GitHub ↗</a
-              >
-            </div>
-          </div>
-          <div class="visualizer" aria-hidden="true" data-tilt>
-            <div class="orbital">
-              <i></i><i></i><i></i><i></i><span>MIC</span>
-            </div>
-            <div class="particles">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-            </div>
-            <b>LISTEN / LOOK / RESPOND</b>
-          </div>
-        </article>
-        <article
-          class="project project-lime reveal"
-          data-project-tags="game audio prototype"
-        >
-          <div class="project-copy">
-            <p class="project-number" data-en="003 / GAMES & PROTOTYPES">
-              003 / JEUX & PROTOTYPES
-            </p>
-            <h3>Playground</h3>
-            <p
-              data-en="Game jams, sound design and playable prototypes. A collection of ideas where sound guides action and tells the space."
-            >
-              Game jams, sound design et prototypes jouables. Une collection
-              d’idées où le son guide l’action et raconte l’espace.
-            </p>
-            <div class="tags">
-              <span>Unity</span><span>Sound design</span><span>Game jam</span>
-            </div>
-            <dl class="project-facts">
-              <div>
-                <dt data-en="Field">Terrain</dt>
-                <dd>Game jams & prototypes</dd>
-              </div>
-              <div>
-                <dt data-en="Tools">Outils</dt>
-                <dd>Unity · Sound design</dd>
-              </div>
-            </dl>
-            <div class="project-actions">
-              <a
-                href="https://lehomar2vinci.itch.io/"
-                target="_blank"
-                rel="noreferrer"
-                data-en="Play on itch.io <span aria-hidden='true'>↗</span>"
-                >Jouer sur itch.io <span aria-hidden="true">↗</span></a
-              >
-            </div>
-          </div>
-          <div class="game-visual" aria-hidden="true" data-tilt>
-            <span class="pixel p1">+</span><span class="pixel p2">×</span
-            ><span class="pixel p3">●</span>
-            <div class="level"><i></i><i></i><i></i><i></i><i></i></div>
-            <b>PRESS SOUND<br />TO START</b>
-          </div>
-        </article>
+        <div class="section-heading"><p class="section-index" data-en="05 — Selected work">05 — Sélection</p><h2 data-en="Projects on air">Projets en écoute</h2><div class="filter-bar" aria-label="Filtrer les projets" data-label-en="Filter projects"><button type="button" class="active" data-filter="all" data-en="All">Tous</button><button type="button" data-filter="audio">Audio</button><button type="button" data-filter="visual" data-en="Visual">Visuel</button><button type="button" data-filter="game" data-en="Games">Jeux</button><span id="project-count" aria-live="polite"></span></div></div>
+        <article class="project project-blue reveal" data-project-tags="audio visual code"><div class="project-copy"><p class="project-number" data-en="001 / AUDIO EXPERIENCE">001 / EXPÉRIENCE AUDIO</p><h3>PestOSC</h3><p data-en="A p5.js audio-visual instrument. The mouse or touch drives frequency and amplitude while the image degrades, changes color and reveals the signal.">Un instrument audio-visuel p5.js. La souris ou le doigt pilote fréquence et amplitude pendant que l’image se dégrade, change de couleur et révèle le signal.</p><dl class="project-facts"><div><dt data-en="Role">Rôle</dt><dd data-en="Design & development">Conception & développement</dd></div><div><dt>Tech</dt><dd>p5.js · Web Audio</dd></div></dl><div class="tags"><span>Instrument</span><span data-en="Real time">Temps réel</span><span data-en="Visualization">Visualisation</span></div><div class="project-actions"><button type="button" data-case="pestosc" data-en="Case study <span aria-hidden='true'>＋</span>">Fiche projet <span aria-hidden="true">＋</span></button><a href="https://github.com/Lehomar2vinci/PestOSC" target="_blank" rel="noreferrer" aria-label="Voir PestOSC sur GitHub" data-label-en="View PestOSC on GitHub">GitHub ↗</a><a href="https://lehomar2vinci.itch.io/pestosc" target="_blank" rel="noreferrer" aria-label="Essayer PestOSC" data-label-en="Try PestOSC">Essayer ! ↗</a></div></div><div class="scope-visual" aria-hidden="true" data-tilt><div class="scope-grid"></div><svg viewBox="0 0 800 320" role="img"><path d="M0 165 C45 165 52 78 95 78 S146 245 192 245 S240 42 285 42 S338 276 384 276 S431 92 478 92 S527 225 574 225 S624 129 670 129 S720 165 800 165" /></svg><div class="scope-dials"><i></i><i></i><i></i></div></div></article>
+        <article class="project project-coral reveal" data-project-tags="audio visual code"><div class="project-copy"><p class="project-number" data-en="002 / AUDIO-VISUAL WEB">002 / WEB AUDIOVISUEL</p><h3>Pesto<br />Visualizer</h3><p data-en="A microphone-driven visualizer. Frequencies animate concentric circles and particles, with adjustable palettes and sensitivity.">Un visualiseur piloté par le microphone. Les fréquences animent des cercles concentriques et des particules, avec palettes et sensibilité réglables.</p><dl class="project-facts"><div><dt data-en="Input">Entrée</dt><dd data-en="Real-time microphone">Microphone temps réel</dd></div><div><dt>Tech</dt><dd>p5.js · p5.sound</dd></div></dl><div class="tags"><span>Microphone</span><span>Particules</span><span>Creative coding</span></div><div class="project-actions"><button type="button" data-case="visualizer" data-en="Case study <span aria-hidden='true'>＋</span>">Fiche projet <span aria-hidden="true">＋</span></button><a href="https://github.com/Lehomar2vinci/PestoVIsualizer" target="_blank" rel="noreferrer" aria-label="Voir PestoVisualizer sur GitHub" data-label-en="View PestoVisualizer on GitHub">GitHub ↗</a></div></div><div class="visualizer" aria-hidden="true" data-tilt><div class="orbital"><i></i><i></i><i></i><i></i><span>MIC</span></div><div class="particles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><b>LISTEN / LOOK / RESPOND</b></div></article>
+        <article class="project project-lime reveal" data-project-tags="game audio prototype"><div class="project-copy"><p class="project-number" data-en="003 / GAMES & PROTOTYPES">003 / JEUX & PROTOTYPES</p><h3>Playground</h3><p data-en="Game jams, sound design and playable prototypes. A collection of ideas where sound guides action and tells the space.">Game jams, sound design et prototypes jouables. Une collection d’idées où le son guide l’action et raconte l’espace.</p><div class="tags"><span>Unity</span><span>Sound design</span><span>Game jam</span></div><dl class="project-facts"><div><dt data-en="Field">Terrain</dt><dd>Game jams & prototypes</dd></div><div><dt data-en="Tools">Outils</dt><dd>Unity · Sound design</dd></div></dl><div class="project-actions"><a href="https://lehomar2vinci.itch.io/" target="_blank" rel="noreferrer" data-en="Play on itch.io <span aria-hidden='true'>↗</span>">Jouer sur itch.io <span aria-hidden="true">↗</span></a></div></div><div class="game-visual" aria-hidden="true" data-tilt><span class="pixel p1">+</span><span class="pixel p2">×</span><span class="pixel p3">●</span><div class="level"><i></i><i></i><i></i><i></i><i></i></div><b>PRESS SOUND<br />TO START</b></div></article>
       </section>
 
-      <section class="method" id="methode">
-        <div class="section-heading">
-          <p class="section-index" data-en="06 — Method">06 — Méthode</p>
-          <h2 data-en="From first listen<br>to the right gesture.">
-            De la première écoute<br />au geste juste.
-          </h2>
-        </div>
-        <div class="method-rail">
-          <article tabindex="0">
-            <span>01</span>
-            <h3 data-en="Listen">Écouter</h3>
-            <p
-              data-en="Understand the context, constraints and people before choosing a solution."
-            >
-              Comprendre le contexte, les contraintes et les personnes avant de
-              choisir une solution.
-            </p>
-            <ul>
-              <li data-en="Needs, audience, constraints">
-                Besoins, public, contraintes
-              </li>
-              <li data-en="Signals to keep or remove">
-                Signaux à garder ou retirer
-              </li>
-            </ul>
-          </article>
-          <article tabindex="0">
-            <span>02</span>
-            <h3 data-en="Prototype">Prototyper</h3>
-            <p
-              data-en="Make the central interaction tangible quickly, with the simplest relevant tool with something real."
-            >
-              Rendre rapidement l’interaction centrale tangible, avec l’outil
-              pertinent le plus simple. (mais avec un petit truc en plus ! )
-            </p>
-            <ul>
-              <li data-en="Playable first version">Première version jouable</li>
-              <li data-en="Core gesture before polish">
-                Geste central avant finition
-              </li>
-            </ul>
-          </article>
-          <article tabindex="0">
-            <span>03</span>
-            <h3 data-en="Test">Tester</h3>
-            <p
-              data-en="Observe actual use, verify accessibility and adjust without protecting the first idea."
-            >
-              Observer l’usage réel, vérifier l’accessibilité et ajuster sans
-              protéger la première idée.
-            </p>
-            <ul>
-              <li data-en="Accessibility and keyboard check">
-                Contrôle accessibilité et clavier
-              </li>
-              <li data-en="Fast feedback loop">Boucle de retour courte</li>
-            </ul>
-          </article>
-          <article tabindex="0">
-            <span>04</span>
-            <h3 data-en="Deliver">Livrer</h3>
-            <p
-              data-en="Polish details, document decisions and leave behind a reliable, maintainable tool."
-            >
-              Soigner les détails, documenter les choix et laisser un outil
-              fiable et maintenable.
-            </p>
-            <ul>
-              <li data-en="Clean handoff and notes">
-                Passation claire et notes
-              </li>
-              <li data-en="Reliable behavior">Comportement fiable</li>
-            </ul>
-          </article>
-        </div>
-        <div
-          class="method-signal"
-          aria-label="Flux de méthode"
-          data-label-en="Method flow"
-        >
-          <span data-en="Brief">Brief</span
-          ><span data-en="Prototype">Prototype</span
-          ><span data-en="Test">Test</span
-          ><span data-en="Delivery">Livraison</span>
-        </div>
-        <div class="availability">
-          <div>
-            <span class="status-dot"></span
-            ><strong
-              data-en="Available for a position, project or collaboration"
-              >Disponible pour un poste, un projet ou une collaboration</strong
-            >
-          </div>
-          <ul>
-            <li>
-              <small data-en="LOCATION">LOCALISATION</small>Nancy · France
-            </li>
-            <li>
-              <small data-en="LANGUAGES">LANGUES</small
-              ><span data-en="French · English B2 · Italian C1"
-                >Français · Anglais B2 · Italien B2</span
-              >
-            </li>
-            <li><small data-en="FOCUS">FOCUS</small>Code · Audio · UX</li>
-          </ul>
-        </div>
-      </section>
+      <section class="method" id="methode"><div class="section-heading"><p class="section-index" data-en="06 — Method">06 — Méthode</p><h2 data-en="From first listen<br>to the right gesture.">De la première écoute<br />au geste juste.</h2></div><div class="method-rail">
+        <article tabindex="0"><span>01</span><h3 data-en="Listen">Écouter</h3><p data-en="Understand the context, constraints and people before choosing a solution.">Comprendre le contexte, les contraintes et les personnes avant de choisir une solution.</p><ul><li data-en="Needs, audience, constraints">Besoins, public, contraintes</li><li data-en="Signals to keep or remove">Signaux à garder ou retirer</li></ul></article>
+        <article tabindex="0"><span>02</span><h3 data-en="Prototype">Prototyper</h3><p data-en="Make the central interaction tangible quickly, with the simplest relevant tool with something real.">Rendre rapidement l’interaction centrale tangible, avec l’outil pertinent le plus simple. (mais avec un petit truc en plus ! )</p><ul><li data-en="Playable first version">Première version jouable</li><li data-en="Core gesture before polish">Geste central avant finition</li></ul></article>
+        <article tabindex="0"><span>03</span><h3 data-en="Test">Tester</h3><p data-en="Observe actual use, verify accessibility and adjust without protecting the first idea.">Observer l’usage réel, vérifier l’accessibilité et ajuster sans protéger la première idée.</p><ul><li data-en="Accessibility and keyboard check">Contrôle accessibilité et clavier</li><li data-en="Fast feedback loop">Boucle de retour courte</li></ul></article>
+        <article tabindex="0"><span>04</span><h3 data-en="Deliver">Livrer</h3><p data-en="Polish details, document decisions and leave behind a reliable, maintainable tool.">Soigner les détails, documenter les choix et laisser un outil fiable et maintenable.</p><ul><li data-en="Clean handoff and notes">Passation claire et notes</li><li data-en="Reliable behavior">Comportement fiable</li></ul></article>
+      </div><div class="method-signal" aria-label="Flux de méthode" data-label-en="Method flow"><span data-en="Brief">Brief</span><span data-en="Prototype">Prototype</span><span data-en="Test">Test</span><span data-en="Delivery">Livraison</span></div><div class="availability"><div><span class="status-dot"></span><strong data-en="Available for a position, project or collaboration">Disponible pour un poste, un projet ou une collaboration</strong></div><ul><li><small data-en="LOCATION">LOCALISATION</small>Nancy · France</li><li><small data-en="LANGUAGES">LANGUES</small><span data-en="French · English B2 · Italian C1">Français · Anglais B2 · Italien B2</span></li><li><small data-en="FOCUS">FOCUS</small>Code · Audio · UX</li></ul></div></section>
 
-      <section class="path" id="parcours">
-        <div class="section-heading">
-          <p class="section-index" data-en="07 — Journey">07 — Parcours</p>
-          <h2 data-en="Technique,<br>fieldwork, listening.">
-            Technique,<br />terrain, écoute.
-          </h2>
-        </div>
-        <div class="timeline">
-          <article>
-            <time>2025 - NOW </time>
-            <div>
-              <h3 data-en="Application designer and developer">
-                Concepteur développeur d’applications
-              </h3>
-              <p
-                data-en="Training in C#, Python, Flutter, UX, databases and agile methods."
-              >
-                Formation en C#, Python, Flutter, UX, bases de données et
-                méthodes agiles.
-              </p>
-            </div>
-            <span>CODE</span>
-          </article>
-          <article>
-            <time>2025</time>
-            <div>
-              <h3 data-en="Order picker · Amazon Augny">
-                Préparateur de commandes · Amazon Augny
-              </h3>
-              <p data-en="Pace, precision, autonomy and process compliance.">
-                Cadence, précision, autonomie et respect des processus.
-              </p>
-            </div>
-            <span data-en="FIELD">TERRAIN</span>
-          </article>
-          <article>
-            <time>2016—2022</time>
-            <div>
-              <h3 data-en="Live sound · Self-employed">
-                Sonorisation · Auto-entreprise
-              </h3>
-              <p
-                data-en="Technical operations, coordination and live situation management."
-              >
-                Pilotage technique, coordination et gestion des situations en
-                direct.
-              </p>
-            </div>
-            <span>LIVE</span>
-          </article>
-          <article>
-            <time>2015—16</time>
-            <div>
-              <h3 data-en="Live sound & hearing prevention">
-                Sonorisation & prévention auditive en service civique.
-              </h3>
-              <p
-                data-en="Community involvement, logistics and hearing risk awareness."
-              >
-                Engagement associatif, logistique et sensibilisation aux
-                risques.
-              </p>
-            </div>
-            <span data-en="LISTEN">ÉCOUTE</span>
-          </article>
-        </div>
-      </section>
+      <section class="path" id="parcours"><div class="section-heading"><p class="section-index" data-en="07 — Journey">07 — Parcours</p><h2 data-en="Technique,<br>fieldwork, listening.">Technique,<br />terrain, écoute.</h2></div><div class="timeline">
+        <article><time>2025</time><div><h3 data-en="Application designer and developer">Concepteur développeur d’applications</h3><p data-en="Training in C#, Python, Flutter, UX, databases and agile methods.">Formation en C#, Python, Flutter, UX, bases de données et méthodes agiles.</p></div><span>CODE</span></article>
+        <article><time>2025</time><div><h3 data-en="Order picker · Amazon Augny">Préparateur de commandes · Amazon Augny</h3><p data-en="Pace, precision, autonomy and process compliance.">Cadence, précision, autonomie et respect des processus.</p></div><span data-en="FIELD">TERRAIN</span></article>
+        <article><time>2016—2022</time><div><h3 data-en="Live sound · Self-employed">Sonorisation · Auto-entreprise</h3><p data-en="Technical operations, coordination and live situation management.">Pilotage technique, coordination et gestion des situations en direct.</p></div><span>LIVE</span></article>
+        <article><time>2015—16</time><div><h3 data-en="Live sound & hearing prevention">Sonorisation & prévention auditive en service civique.</h3><p data-en="Community involvement, logistics and hearing risk awareness.">Engagement associatif, logistique et sensibilisation aux risques.</p></div><span data-en="LISTEN">ÉCOUTE</span></article>
+      </div></section>
 
-      <section class="contact" id="contact">
-        <p data-en="A project to set in motion?">
-          Un projet à mettre en mouvement&nbsp;?
-        </p>
-        <a
-          href="mailto:n.chambrette@gmail.com"
-          data-en="Let's talk<span aria-hidden='true'>↗</span>"
-          >Parlons-en<span aria-hidden="true">↗</span></a
-        >
-        <div class="contact-meta">
-          <span>Nancy · France</span
-          ><button
-            class="copy-email"
-            type="button"
-            data-copy="n.chambrette@gmail.com"
-            data-en="Copy email"
-          >
-            Copier l’e-mail
-          </button>
-          <nav aria-label="Réseaux sociaux" data-label-en="Social media">
-            <a
-              href="https://github.com/Lehomar2vinci"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            ><a
-              href="https://www.linkedin.com/in/nathan-chambrette-985862b7"
-              target="_blank"
-              rel="noreferrer"
-              >LinkedIn</a
-            ><a
-              href="https://lehomar2vinci.itch.io/"
-              target="_blank"
-              rel="noreferrer"
-              >itch.io</a
-            >
-          </nav>
-        </div>
-      </section>
+      <section class="contact" id="contact"><p data-en="A project to set in motion?">Un projet à mettre en mouvement&nbsp;?</p><a href="mailto:n.chambrette@gmail.com" data-en="Let's talk<span aria-hidden='true'>↗</span>">Parlons-en<span aria-hidden="true">↗</span></a><div class="contact-meta"><span>Nancy · France</span><button class="copy-email" type="button" data-copy="n.chambrette@gmail.com" data-en="Copy email">Copier l’e-mail</button><nav aria-label="Réseaux sociaux" data-label-en="Social media"><a href="https://github.com/Lehomar2vinci" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/nathan-chambrette-985862b7" target="_blank" rel="noreferrer">LinkedIn</a><a href="https://lehomar2vinci.itch.io/" target="_blank" rel="noreferrer">itch.io</a></nav></div></section>
     </main>
 
-    <dialog
-      class="command-dialog"
-      id="command-dialog"
-      aria-labelledby="command-title"
-    >
-      <div class="command-search">
-        <span aria-hidden="true">⌕</span
-        ><label
-          class="sr-only"
-          for="command-input"
-          id="command-title"
-          data-en="Quick navigation"
-          >Navigation rapide</label
-        ><input
-          id="command-input"
-          type="search"
-          role="combobox"
-          aria-controls="command-list"
-          aria-expanded="false"
-          aria-autocomplete="list"
-          autocomplete="off"
-          placeholder="Rechercher une destination…"
-          data-placeholder-en="Search for a destination…"
-        /><button
-          class="command-close"
-          type="button"
-          aria-label="Fermer la navigation rapide"
-          data-label-en="Close quick navigation"
-        >
-          ESC
-        </button>
-      </div>
-      <div
-        class="command-list"
-        id="command-list"
-        role="listbox"
-        aria-label="Destinations"
-        data-label-en="Destinations"
-      >
-        <button
-          id="command-projects"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#projets"
-        >
-          <span
-            ><b>01</b
-            ><span data-en="Selected projects">Projets sélectionnés</span></span
-          ><kbd>P</kbd>
-        </button>
-        <button
-          id="command-profile"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#profil"
-        >
-          <span
-            ><b>02</b
-            ><span data-en="Profile & expertise">Profil & expertise</span></span
-          ><kbd>A</kbd>
-        </button>
-        <button
-          id="command-mix"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#mix"
-        >
-          <span
-            ><b>03</b
-            ><span data-en="Skill mixer">Mixeur de compétences</span></span
-          ><kbd>X</kbd>
-        </button>
-        <button
-          id="command-studio"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#studio"
-        >
-          <span
-            ><b>04</b
-            ><span data-en="Interactive studio">Studio interactif</span></span
-          ><kbd>S</kbd>
-        </button>
-        <button
-          id="command-method"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#methode"
-        >
-          <span
-            ><b>05</b
-            ><span data-en="Working method">Méthode de travail</span></span
-          ><kbd>M</kbd>
-        </button>
-        <button
-          id="command-journey"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-target="#parcours"
-        >
-          <span
-            ><b>06</b
-            ><span data-en="Professional journey"
-              >Parcours professionnel</span
-            ></span
-          ><kbd>J</kbd>
-        </button>
-        <button
-          id="command-tour"
-          type="button"
-          role="option"
-          aria-selected="false"
-          data-command="tour"
-        >
-          <span
-            ><b>07</b
-            ><span data-en="Start the guided tour"
-              >Lancer la visite guidée</span
-            ></span
-          ><kbd>V</kbd>
-        </button>
-        <a
-          id="command-email"
-          role="option"
-          aria-selected="false"
-          href="mailto:n.chambrette@gmail.com"
-          ><span
-            ><b>08</b
-            ><span data-en="Write an email">Écrire un e-mail</span></span
-          ><kbd>E</kbd></a
-        >
-        <a
-          id="command-github"
-          role="option"
-          aria-selected="false"
-          href="https://github.com/Lehomar2vinci"
-          target="_blank"
-          rel="noreferrer"
-          ><span><b>09</b><span data-en="Open GitHub">Ouvrir GitHub</span></span
-          ><kbd>G</kbd></a
-        >
-      </div>
-      <div class="command-help">
-        <span data-en="↑↓ Navigate">↑↓ Naviguer</span
-        ><span data-en="↵ Open">↵ Ouvrir</span
-        ><span data-en="ESC Close">ESC Fermer</span>
-      </div>
-    </dialog>
+    <dialog class="command-dialog" id="command-dialog" aria-labelledby="command-title"><div class="command-search"><span aria-hidden="true">⌕</span><label class="sr-only" for="command-input" id="command-title" data-en="Quick navigation">Navigation rapide</label><input id="command-input" type="search" role="combobox" aria-controls="command-list" aria-expanded="false" aria-autocomplete="list" autocomplete="off" placeholder="Rechercher une destination…" data-placeholder-en="Search for a destination…" /><button class="command-close" type="button" aria-label="Fermer la navigation rapide" data-label-en="Close quick navigation">ESC</button></div><div class="command-list" id="command-list" role="listbox" aria-label="Destinations" data-label-en="Destinations">
+      <button id="command-projects" type="button" role="option" aria-selected="false" data-target="#projets"><span><b>01</b><span data-en="Selected projects">Projets sélectionnés</span></span><kbd>P</kbd></button>
+      <button id="command-profile" type="button" role="option" aria-selected="false" data-target="#profil"><span><b>02</b><span data-en="Profile & expertise">Profil & expertise</span></span><kbd>A</kbd></button>
+      <button id="command-mix" type="button" role="option" aria-selected="false" data-target="#mix"><span><b>03</b><span data-en="Skill mixer">Mixeur de compétences</span></span><kbd>X</kbd></button>
+      <button id="command-studio" type="button" role="option" aria-selected="false" data-target="#studio"><span><b>04</b><span data-en="Interactive studio">Studio interactif</span></span><kbd>S</kbd></button>
+      <button id="command-method" type="button" role="option" aria-selected="false" data-target="#methode"><span><b>05</b><span data-en="Working method">Méthode de travail</span></span><kbd>M</kbd></button>
+      <button id="command-journey" type="button" role="option" aria-selected="false" data-target="#parcours"><span><b>06</b><span data-en="Professional journey">Parcours professionnel</span></span><kbd>J</kbd></button>
+      <button id="command-tour" type="button" role="option" aria-selected="false" data-command="tour"><span><b>07</b><span data-en="Start the guided tour">Lancer la visite guidée</span></span><kbd>V</kbd></button>
+      <a id="command-email" role="option" aria-selected="false" href="mailto:n.chambrette@gmail.com"><span><b>08</b><span data-en="Write an email">Écrire un e-mail</span></span><kbd>E</kbd></a>
+      <a id="command-github" role="option" aria-selected="false" href="https://github.com/Lehomar2vinci" target="_blank" rel="noreferrer"><span><b>09</b><span data-en="Open GitHub">Ouvrir GitHub</span></span><kbd>G</kbd></a>
+    </div><div class="command-help"><span data-en="↑↓ Navigate">↑↓ Naviguer</span><span data-en="↵ Open">↵ Ouvrir</span><span data-en="ESC Close">ESC Fermer</span></div></dialog>
 
-    <dialog class="tour-dialog" id="tour-dialog" aria-labelledby="tour-title">
-      <div class="tour-panel">
-        <p id="tour-step">01 / 04</p>
-        <h2 id="tour-title"></h2>
-        <p id="tour-text"></p>
-        <div class="tour-actions">
-          <button type="button" id="tour-prev" data-en="Previous">
-            Précédent</button
-          ><button type="button" id="tour-next" data-en="Next">Suivant</button
-          ><button type="button" id="tour-close" data-en="Close">Fermer</button>
-        </div>
-      </div>
-    </dialog>
-    <dialog class="case-dialog" id="case-dialog" aria-labelledby="case-title">
-      <div class="case-top">
-        <p id="case-index" data-en="CASE STUDY">FICHE PROJET</p>
-        <button
-          type="button"
-          class="case-close"
-          aria-label="Fermer la fiche projet"
-          data-label-en="Close case study"
-          data-en="Close ×"
-        >
-          Fermer ×
-        </button>
-      </div>
-      <div class="case-content">
-        <div>
-          <p class="case-kicker" id="case-kicker"></p>
-          <h2 id="case-title"></h2>
-          <p class="case-lead" id="case-lead"></p>
-        </div>
-        <div class="case-details">
-          <section>
-            <h3 data-en="The gesture">Le geste</h3>
-            <p id="case-gesture"></p>
-          </section>
-          <section>
-            <h3 data-en="The system">Le système</h3>
-            <p id="case-system"></p>
-          </section>
-          <section>
-            <h3 data-en="What I explore">Ce que j’explore</h3>
-            <p id="case-explore"></p>
-          </section>
-          <a
-            id="case-link"
-            href="https://github.com/Lehomar2vinci/PestOSC"
-            target="_blank"
-            rel="noreferrer"
-            data-en="Open GitHub repository ↗"
-            >Ouvrir le dépôt GitHub ↗</a
-          >
-        </div>
-      </div>
-    </dialog>
+    <dialog class="tour-dialog" id="tour-dialog" aria-labelledby="tour-title"><div class="tour-panel"><p id="tour-step">01 / 04</p><h2 id="tour-title"></h2><p id="tour-text"></p><div class="tour-actions"><button type="button" id="tour-prev" data-en="Previous">Précédent</button><button type="button" id="tour-next" data-en="Next">Suivant</button><button type="button" id="tour-close" data-en="Close">Fermer</button></div></div></dialog>
+    <dialog class="case-dialog" id="case-dialog" aria-labelledby="case-title"><div class="case-top"><p id="case-index" data-en="CASE STUDY">FICHE PROJET</p><button type="button" class="case-close" aria-label="Fermer la fiche projet" data-label-en="Close case study" data-en="Close ×">Fermer ×</button></div><div class="case-content"><div><p class="case-kicker" id="case-kicker"></p><h2 id="case-title"></h2><p class="case-lead" id="case-lead"></p></div><div class="case-details"><section><h3 data-en="The gesture">Le geste</h3><p id="case-gesture"></p></section><section><h3 data-en="The system">Le système</h3><p id="case-system"></p></section><section><h3 data-en="What I explore">Ce que j’explore</h3><p id="case-explore"></p></section><a id="case-link" href="https://github.com/Lehomar2vinci/PestOSC" target="_blank" rel="noreferrer" data-en="Open GitHub repository ↗">Ouvrir le dépôt GitHub ↗</a></div></div></dialog>
     <div class="toast" role="status" aria-live="polite"></div>
-    <footer>
-      <span>© 2026 Nathan Chambrette</span
-      ><a href="#top" data-en="Back to top ↑">Retour en haut ↑</a>
-    </footer>
-    <script src="assets/js/data.js"></script>
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/app.js"></script>
+    <footer><span>© 2026 Nathan Chambrette</span><a href="#top" data-en="Back to top ↑">Retour en haut ↑</a></footer>
+    <script src="assets/js/data.js"></script><script src="assets/js/utils.js"></script><script src="assets/js/app.js"></script>
   </body>
 </html>
