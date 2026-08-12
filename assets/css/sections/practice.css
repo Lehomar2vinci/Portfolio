@@ -1,0 +1,105 @@
+/* Practice cards section */
+
+.practice {
+  border-top: var(--line);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.practice .section-heading {
+  padding-bottom: 60px;
+}
+
+.practice-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 32px 110px;
+}
+
+.practice-grid article {
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 26px;
+  border: 2px solid var(--paper);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease-out-expo),
+    box-shadow 0.28s var(--ease-out-expo);
+}
+
+.practice-grid article+article {
+  border-left: 0;
+}
+
+.practice-grid article:nth-child(1) {
+  background: var(--blue);
+}
+
+.practice-grid article:nth-child(2) {
+  background: var(--coral);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.practice-grid article:nth-child(3) {
+  background: var(--lime);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+
+.practice-icon {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  margin-bottom: auto;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.practice-grid article>p:first-of-type {
+  margin: 28px 0 12px;
+  font: 700 .68rem "Courier New",monospace;
+}
+
+.practice-grid h3 {
+  margin: 0 0 20px;
+  font-size: 2.55rem;
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.practice-grid article>p:last-child {
+  max-width: 34ch;
+  margin: auto 0 0;
+  font-size: .92rem;
+}
+
+.practice-grid article::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  aspect-ratio: 1;
+  right: -110px;
+  top: -110px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.18;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+
+.practice-grid article:hover {
+  z-index: 2;
+  transform: translateY(-8px) rotate(-0.35deg);
+  box-shadow: 8px 8px 0 var(--paper);
+}
+
+.practice-grid article:hover::after {
+  transform: scale(1.3);
+}

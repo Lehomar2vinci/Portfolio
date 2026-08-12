@@ -1,0 +1,70 @@
+/* Profile and manifesto section */
+
+.manifesto,.path {
+  max-width: var(--max);
+  margin: auto;
+  padding: 110px 32px;
+}
+
+.manifesto h2 {
+  max-width: 1240px;
+  margin: 0;
+  font-size: 4.4rem;
+  line-height: .98;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.manifesto h2 span {
+  background: var(--blue);
+  color: #fff;
+  padding: 0 .12em;
+  display: inline-block;
+  transform: rotate(-1deg);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+.manifesto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  margin-top: 80px;
+  align-items: start;
+}
+
+.manifesto-grid>p {
+  max-width: 500px;
+  margin: 0;
+  font-size: 1.25rem;
+  position: relative;
+  padding-left: 22px;
+  border-left: 4px solid var(--coral);
+}
+
+.manifesto ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--line);
+}
+
+.manifesto li {
+  display: flex;
+  gap: 24px;
+  padding: 16px 4px;
+  border-bottom: var(--line);
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: padding-left 0.24s var(--ease-out-expo),
+    background 0.2s ease;
+}
+
+.manifesto li span {
+  color: var(--blue);
+  font: 700 .74rem "Courier New",monospace;
+}
+
+.manifesto li:hover {
+  padding-left: 14px;
+  background: var(--yellow);
+}

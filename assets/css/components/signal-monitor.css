@@ -1,0 +1,46 @@
+/* Fixed section and progress monitor */
+
+.signal-monitor {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 48;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  gap: 9px;
+  min-width: 190px;
+  padding: 8px 10px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(244, 240, 232, 0.92);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  backdrop-filter: blur(10px);
+  font: 700 0.6rem/1 "Courier New", monospace;
+  text-transform: uppercase;
+  pointer-events: none;
+  transition: transform 0.3s var(--ease-out-expo),
+    opacity 0.3s ease;
+}
+
+.signal-monitor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 3px rgba(17, 17, 15, 0.14);
+}
+
+.signal-monitor-section {
+  min-width: 86px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal-monitor-progress {
+  justify-self: end;
+  padding-left: 8px;
+  border-left: 1px solid currentColor;
+}

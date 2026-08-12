@@ -1,0 +1,222 @@
+/* Hero composition and editorial signal layer */
+
+.hero {
+  min-height: 100svh;
+  padding: 126px max(24px,calc((100vw - var(--max))/2 + 24px)) 48px;
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(520px,1.1fr);
+  align-items: center;
+  gap: 48px;
+  overflow: hidden;
+  background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, 0.36), transparent 25rem),
+    var(--yellow);
+  border-bottom: var(--line);
+  --pointer-x: 70%;
+  --pointer-y: 38%;
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+}
+
+.kicker,.section-index,.project-number {
+  margin: 0 0 24px;
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: #23a843;
+  box-shadow: 0 0 0 3px rgba(35,168,67,.2);
+}
+
+h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: 5.2rem;
+  line-height: .88;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  font-weight: 950;
+}
+
+h1 em {
+  position: relative;
+  display: inline-block;
+  margin-top: .11em;
+  padding: .02em .15em .1em;
+  border: var(--line);
+  background: var(--coral);
+  box-shadow: 8px 8px 0 var(--blue);
+  font-family: Georgia,serif;
+  font-size: .78em;
+  font-weight: 400;
+  line-height: .92;
+  text-transform: none;
+  transform: rotate(-1.2deg);
+  transition: transform .2s ease,box-shadow .2s ease;
+}
+
+h1 em::after {
+  content: "CODE / AUDIO";
+  position: absolute;
+  right: 10px;
+  bottom: -21px;
+  padding: 3px 7px;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font: 700 .52rem/1 "Courier New",monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transform: rotate(1.2deg);
+}
+
+.hero-copy:hover h1 em {
+  transform: rotate(0);
+  box-shadow: 5px 5px 0 var(--blue);
+}
+
+.hero-tagline {
+  display: inline-block;
+  margin: 36px 0 0;
+  padding: 8px 12px;
+  border: var(--line);
+  background: var(--paper);
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: Georgia,serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  transform: rotate(-0.7deg);
+}
+
+.hero-intro {
+  max-width: 590px;
+  margin: 20px 0 30px;
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.round-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 14px 18px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  text-decoration: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: .78rem;
+  box-shadow: 4px 4px 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.round-link span {
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.22;
+  background-image: linear-gradient(rgba(17, 17, 15, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 15, 0.15) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to right, black 0 42%, transparent 78%);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: min(54vw, 760px);
+  aspect-ratio: 1;
+  right: -13vw;
+  top: 5%;
+  z-index: -1;
+  border: 2px solid rgba(17, 17, 15, 0.35);
+  border-radius: 50%;
+  box-shadow: 0 0 0 44px rgba(17, 17, 15, 0.035),
+    0 0 0 90px rgba(17, 17, 15, 0.025);
+  pointer-events: none;
+}
+
+.hero-copy::before {
+  content: "SIGNAL / 001";
+  position: absolute;
+  top: -36px;
+  left: 0;
+  font: 700 0.58rem/1 "Courier New", monospace;
+  letter-spacing: 0.12em;
+  opacity: 0.62;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -12px 0 30px;
+}
+
+.hero-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: rgba(244, 240, 232, 0.7);
+  font: 700 0.58rem/1 "Courier New", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-meta span:first-child::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #23a843;
+}
+
+.round-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateX(-104%);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.round-link:hover {
+  color: var(--paper);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.round-link:hover::before {
+  transform: translateX(0);
+}
+
+.round-link > * , .round-link {
+  isolation: isolate;
+}

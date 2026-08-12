@@ -1,0 +1,87 @@
+/* Contrast, reduced motion and reveal behavior */
+
+.high-contrast {
+  --paper: #fff;
+  --ink: #000;
+  --blue: #0645ff;
+  --coral: #ffd800;
+  --lime: #00d9ff;
+  --yellow: #fff;
+}
+
+.high-contrast .project-coral,.high-contrast .contact {
+  background-color: var(--coral);
+  background-image: repeating-linear-gradient(135deg,transparent 0 18px,rgba(0,0,0,.16) 18px 21px);
+}
+
+.high-contrast .project-lime,.high-contrast .practice-grid article:nth-child(3) {
+  background-color: var(--lime);
+  background-image: repeating-linear-gradient(45deg,transparent 0 20px,rgba(0,0,0,.15) 20px 23px);
+}
+
+.high-contrast .status-dot {
+  background: var(--ink);
+  box-shadow: 0 0 0 3px var(--paper),0 0 0 5px var(--ink);
+}
+
+.high-contrast :focus-visible {
+  outline-color: #ff00d4;
+}
+
+.reduce-motion {
+  scroll-behavior: auto;
+}
+
+.reduce-motion *,.reduce-motion *::before,.reduce-motion *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+}
+
+.reduce-motion .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .7s ease,transform .7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,*::before,*::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reduce-motion .signal-monitor, .reduce-motion .hero, .reduce-motion .instrument, .reduce-motion .practice-grid article, .reduce-motion .project-copy h3, .reduce-motion .timeline article, .reduce-motion .contact > a {
+  transition: none !important;
+}
+
+.reduce-motion .hero::after, .reduce-motion .practice-grid article::after, .reduce-motion .contact::before {
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signal-monitor, .hero, .instrument, .practice-grid article, .project-copy h3, .timeline article, .contact > a {
+    transition: none !important;
+  }
+}

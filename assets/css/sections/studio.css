@@ -1,0 +1,159 @@
+/* Interactive brief studio */
+
+.studio {
+  border-top: var(--line);
+  background: var(--paper);
+}
+
+.brief-lab {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 32px 110px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+}
+
+.brief-controls,.brief-output {
+  border: var(--line);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.brief-controls {
+  padding: 26px;
+  background: var(--yellow);
+}
+
+.brief-controls h3 {
+  max-width: 760px;
+  margin: 0 0 24px;
+  font-size: 1.9rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.brief-controls fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border: 0;
+  border-top: var(--line);
+}
+
+.brief-controls legend {
+  padding: 0 12px 0 0;
+  font: 700 .68rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.choice {
+  padding: 11px 13px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.18s var(--ease-snap),
+    box-shadow 0.18s var(--ease-snap),
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.choice:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translate(2px,2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.choice.active {
+  background: var(--blue);
+  color: #fff;
+  transform: translate(2px,2px);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.32);
+}
+
+.brief-output {
+  position: relative;
+  top: 100px;
+  align-self: start;
+  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.brief-label {
+  margin: 0 0 22px;
+  color: var(--lime);
+  font: 700 .68rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.brief-output h3 {
+  margin: 0;
+  font-size: 3.1rem;
+  line-height: .92;
+  text-transform: uppercase;
+}
+
+.brief-meter {
+  height: 16px;
+  margin: auto 0 22px;
+  border: 2px solid var(--paper);
+  background: rgba(255,255,255,.12);
+}
+
+.brief-meter span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--lime);
+  transition: width .35s ease;
+}
+
+.brief-output dl {
+  margin: 0;
+  border-top: 2px solid var(--paper);
+}
+
+.brief-output dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--paper);
+}
+
+.brief-output dt,.brief-output dd {
+  margin: 0;
+  font: 700 .66rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.brief-copy {
+  align-self: flex-start;
+  margin-top: 24px;
+  padding: 12px 15px;
+  border: var(--line);
+  background: var(--coral);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--paper);
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.brief-copy:hover {
+  transform: translate(2px,2px);
+  box-shadow: 1px 1px 0 var(--paper);
+}

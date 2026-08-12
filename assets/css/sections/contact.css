@@ -1,0 +1,90 @@
+/* Contact section */
+
+.contact {
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px max(32px,calc((100vw - var(--max))/2 + 32px));
+  background: var(--coral);
+  border-top: var(--line);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.contact>p {
+  margin: 0 0 18px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact>a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid;
+  text-decoration: none;
+  font-size: 7rem;
+  line-height: 1.05;
+  font-weight: 950;
+  text-transform: uppercase;
+  position: relative;
+  transition: letter-spacing 0.3s var(--ease-out-expo),
+    padding-left 0.3s var(--ease-out-expo);
+}
+
+.contact>a span {
+  font-size: 5rem;
+}
+
+.contact-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-meta nav {
+  display: flex;
+  gap: 24px;
+}
+
+.contact-meta a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.copy-email {
+  padding: 0 0 3px;
+  border: 0;
+  border-bottom: 2px solid;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(70vw, 920px);
+  aspect-ratio: 1;
+  right: -18%;
+  bottom: -70%;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  opacity: 0.14;
+  box-shadow: 0 0 0 70px rgba(17, 17, 15, 0.04), 0 0 0 140px rgba(17, 17, 15, 0.025);
+}
+
+.contact > a:hover {
+  padding-left: 16px;
+  letter-spacing: -0.03em;
+}

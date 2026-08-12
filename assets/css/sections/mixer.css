@@ -1,0 +1,166 @@
+/* Skill mixer section */
+
+.skill-mixer {
+  border-top: var(--line);
+  background: var(--yellow);
+}
+
+.mixer-board {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 56px 110px;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(360px,.9fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.mixer-console,.mixer-output {
+  min-width: 0;
+  border: var(--line);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.mixer-console {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 14px;
+  padding: 24px;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.mixer-console label {
+  min-width: 0;
+  min-height: 420px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  gap: 18px;
+  padding: 16px 10px;
+  border: var(--line);
+  background: var(--ink);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+
+.mixer-console label span {
+  display: grid;
+  gap: 5px;
+  justify-items: center;
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.mixer-console label b {
+  color: var(--lime);
+  font: 700 .68rem "Courier New",monospace;
+}
+
+.skill-range {
+  width: 34px;
+  height: 310px;
+  align-self: center;
+  accent-color: var(--lime);
+  writing-mode: vertical-lr;
+  direction: rtl;
+  cursor: pointer;
+}
+
+.mixer-output {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  background: var(--blue);
+  color: #fff;
+  overflow: hidden;
+}
+
+.mixer-output h3 {
+  max-width: 680px;
+  margin: 0 0 16px;
+  font-size: clamp(2.7rem,4vw,4rem);
+  line-height: .88;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.mixer-output>p:not(.brief-label) {
+  max-width: 58ch;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.mix-stats {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 0;
+  margin: 22px 0 0;
+  border: 2px solid #fff;
+}
+
+.mix-stats div {
+  min-width: 0;
+  padding: 10px 12px;
+}
+
+.mix-stats div+div {
+  border-left: 2px solid #fff;
+}
+
+.mix-stats dt,.mix-stats dd {
+  margin: 0;
+  font: 700 .66rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.mix-stats dt {
+  color: var(--lime);
+}
+
+.mix-stats dd {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.mix-bars {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  min-height: 150px;
+  margin: auto 0 24px;
+  padding: 16px;
+  border: 2px solid #fff;
+  background: rgba(255,255,255,.12);
+}
+
+.mix-bars i {
+  flex: 1;
+  height: var(--h);
+  min-height: 12px;
+  border: 2px solid #fff;
+  background: var(--lime);
+  transition: height .25s ease;
+}
+
+.mixer-output button {
+  align-self: flex-start;
+  padding: 12px 15px;
+  border: var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 #fff;
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mixer-output button:hover {
+  transform: translate(2px,2px);
+  box-shadow: 1px 1px 0 #fff;
+}

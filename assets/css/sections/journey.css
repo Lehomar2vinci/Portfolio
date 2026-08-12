@@ -1,0 +1,64 @@
+/* Professional journey timeline */
+
+.path .section-heading {
+  padding: 0 0 70px;
+}
+
+.timeline {
+  border-top: var(--line);
+}
+
+.timeline article {
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  gap: 36px;
+  align-items: start;
+  padding: 26px 0;
+  border-bottom: var(--line);
+  position: relative;
+  transition: padding-left 0.24s var(--ease-out-expo),
+    background 0.2s ease;
+}
+
+.timeline time {
+  font: 700 .8rem "Courier New",monospace;
+}
+
+.timeline h3 {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+}
+
+.timeline p {
+  margin: 0;
+  color: #4b4b46;
+}
+
+.timeline article>span {
+  padding: 5px 8px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: .62rem;
+  font-weight: 900;
+}
+
+.timeline article::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--blue);
+  transform: translateY(-50%);
+  transition: width 0.25s var(--ease-out-expo);
+}
+
+.timeline article:hover {
+  padding-left: 18px;
+  background: rgba(244, 221, 53, 0.25);
+}
+
+.timeline article:hover::before {
+  width: 10px;
+}

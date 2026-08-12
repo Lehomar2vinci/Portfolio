@@ -1,0 +1,15 @@
+/* Footer */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 32px;
+  background: var(--ink);
+  color: #fff;
+  font-size: .72rem;
+  text-transform: uppercase;
+}
+
+footer a {
+  color: #fff;
+}

@@ -1,0 +1,37 @@
+/* Shared section headings and structural markers */
+
+.section-heading {
+  max-width: var(--max);
+  margin: auto;
+  padding: 100px 32px 50px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 5.2rem;
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.section-heading, .manifesto, .path {
+  position: relative;
+}
+
+.section-heading::before, .manifesto::before, .path::before {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: 76px;
+  width: 42px;
+  height: 5px;
+  background: var(--blue);
+  box-shadow: 48px 0 0 var(--coral), 96px 0 0 var(--lime);
+}
+
+.section-heading .section-index, .manifesto > .section-index {
+  padding-top: 18px;
+}
+
+.section-heading h2, .manifesto h2, .contact > a {
+  text-wrap: balance;
+}

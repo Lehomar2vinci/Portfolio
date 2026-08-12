@@ -1,0 +1,28 @@
+/* Shared mixer and studio hardware treatment */
+
+.mixer-console, .mixer-output, .brief-controls, .brief-output {
+  border-width: 3px;
+}
+
+.mixer-console label::after {
+  content: "";
+  position: absolute;
+  inset: auto 10px 12px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--lime));
+  opacity: 0.6;
+}
+
+.mixer-output {
+  position: relative;
+}
+
+.mixer-output::before, .brief-output::before {
+  content: "OUTPUT";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  opacity: 0.45;
+  font: 700 0.55rem/1 "Courier New", monospace;
+  letter-spacing: 0.12em;
+}

@@ -1,8 +1,22 @@
-@import "./base.css";
-@import "./shell.css";
-@import "./sections.css";
-@import "./projects.css";
-@import "./overlays.css";
+/* CSS entry point — semantic modules, cascade order is intentional. */
+@import "./core/tokens.css";
+@import "./core/base.css";
+@import "./layout/header.css";
+@import "./components/signal-monitor.css";
+@import "./layout/hero.css";
+@import "./components/instrument.css";
+@import "./components/ticker.css";
+@import "./sections/profile.css";
+@import "./sections/mixer.css";
+@import "./sections/practice.css";
+@import "./sections/studio.css";
+@import "./sections/panels.css";
+@import "./sections/shared.css";
+@import "./sections/projects.css";
+@import "./sections/method.css";
+@import "./sections/journey.css";
+@import "./sections/contact.css";
+@import "./layout/footer.css";
+@import "./overlays/dialogs.css";
+@import "./overlays/accessibility.css";
 @import "./responsive.css";
-
-@import "./experience.css";

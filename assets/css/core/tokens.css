@@ -1,0 +1,35 @@
+/* Design tokens and palettes */
+
+:root {
+  --paper: #f4f0e8;
+  --ink: #11110f;
+  --blue: #2455e6;
+  --coral: #ff6955;
+  --lime: #c9f04a;
+  --yellow: #f4dd35;
+  --line: 2px solid var(--ink);
+  --max: 1440px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --surface-shadow: 9px 9px 0 var(--ink);
+  --surface-shadow-small: 5px 5px 0 var(--ink);
+  --section-space: clamp(72px, 8vw, 120px);
+}
+
+.palette-studio {
+  --paper: #f7f2e6;
+  --ink: #101010;
+  --blue: #006bff;
+  --coral: #ff4f38;
+  --lime: #a9ff3f;
+  --yellow: #f9d638;
+}
+
+.palette-mono {
+  --paper: #f8f8f2;
+  --ink: #080808;
+  --blue: #11110f;
+  --coral: #e9e9df;
+  --lime: #d7ff42;
+  --yellow: #fff;
+}

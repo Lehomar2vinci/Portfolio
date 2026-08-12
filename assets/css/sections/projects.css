@@ -1,0 +1,498 @@
+/* Selected work and project visualizations */
+
+.work {
+  border-top: var(--line);
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 26px;
+}
+
+.filter-bar button {
+  padding: 9px 12px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.filter-bar button:hover,.filter-bar button.active {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translate(2px,2px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.filter-bar span {
+  margin-left: 10px;
+  font: 700 .68rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.project {
+  min-height: 700px;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  border-top: var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.project.filtered-out {
+  display: none;
+}
+
+.project:last-child {
+  border-bottom: var(--line);
+}
+
+.project-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 64px max(32px,calc((100vw - var(--max))/2 + 32px));
+  padding-right: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.project-copy h3 {
+  margin: 0 0 28px;
+  font-size: 4.3rem;
+  line-height: .85;
+  text-transform: uppercase;
+  position: relative;
+  text-shadow: 0 0 0 currentColor;
+  transition: transform 0.28s var(--ease-out-expo),
+    text-shadow 0.28s var(--ease-out-expo);
+}
+
+.project-copy>p:not(.project-number) {
+  max-width: 470px;
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.project-facts {
+  width: min(100%,470px);
+  margin: 28px 0 0;
+  border-top: 1px solid currentColor;
+}
+
+.project-facts>div {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid currentColor;
+}
+
+.project-facts dt {
+  font: 700 .64rem "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.project-facts dd {
+  margin: 0;
+  font-size: .74rem;
+  font-weight: 800;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.project-actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 36px;
+}
+
+.project-actions button,.project-actions a {
+  padding: 11px 0;
+  border: 0;
+  border-bottom: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: .72rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.project-actions button span {
+  margin-left: 18px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 28px;
+}
+
+.tags span {
+  padding: 6px 9px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: .66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.project-blue {
+  background: var(--blue);
+  color: #fff;
+}
+
+.project-blue .project-copy {
+  color: #fff;
+}
+
+.project-blue .tags span {
+  border-color: #fff;
+}
+
+.project-coral {
+  background: var(--coral);
+}
+
+.project-lime {
+  background: var(--lime);
+}
+
+.scope-visual,.visualizer,.game-visual {
+  position: relative;
+  min-width: 0;
+  margin: 48px 48px 48px 0;
+  border: 3px solid var(--ink);
+  overflow: hidden;
+  box-shadow: 12px 12px 0 var(--ink);
+  transform: perspective(900px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
+  transition: transform 0.22s ease,
+    box-shadow 0.28s var(--ease-out-expo),
+    filter 0.28s ease;
+}
+
+.scope-visual::after,.visualizer::after,.game-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--glow-x) var(--glow-y),rgba(255,255,255,.38),transparent 30%);
+  mix-blend-mode: screen;
+}
+
+.scope-visual {
+  display: grid;
+  place-items: center;
+  background: #121210;
+}
+
+.scope-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .27;
+  background-size: 50px 50px;
+  background-image: linear-gradient(#c9f04a 1px,transparent 1px),linear-gradient(90deg,#c9f04a 1px,transparent 1px);
+}
+
+.scope-visual svg {
+  position: relative;
+  width: 92%;
+  overflow: visible;
+}
+
+.scope-visual path {
+  fill: none;
+  stroke: var(--lime);
+  stroke-width: 8;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 8px var(--lime));
+  stroke-dasharray: 1800;
+  animation: trace 5s linear infinite;
+}
+
+@keyframes trace {
+  from {
+    stroke-dashoffset: 1800;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.scope-dials {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  display: flex;
+  gap: 12px;
+}
+
+.scope-dials i {
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+}
+
+.scope-dials i::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 16px;
+  margin: 4px auto;
+  background: var(--paper);
+  transform: rotate(30deg);
+  transform-origin: bottom;
+}
+
+.visualizer {
+  display: grid;
+  place-items: center;
+  background: var(--yellow);
+}
+
+.orbital {
+  position: relative;
+  width: min(52vw,470px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.orbital i {
+  position: absolute;
+  inset: var(--inset,0);
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  animation: pulse-ring 2.2s ease-in-out infinite alternate;
+}
+
+.orbital i:nth-child(2) {
+  --inset: 12%;
+  animation-delay: -.4s;
+  border-color: var(--blue);
+}
+
+.orbital i:nth-child(3) {
+  --inset: 24%;
+  animation-delay: -.8s;
+  border-color: var(--coral);
+}
+
+.orbital i:nth-child(4) {
+  --inset: 36%;
+  animation-delay: -1.2s;
+}
+
+.orbital span {
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 18%;
+  aspect-ratio: 1;
+  border: var(--line);
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: .68rem;
+  font-weight: 900;
+}
+
+@keyframes pulse-ring {
+  to {
+    transform: scale(.88);
+  }
+}
+
+.particles {
+  position: absolute;
+  inset: 6%;
+}
+
+.particles i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--ink);
+  background: var(--blue);
+  transform: rotate(45deg);
+  animation: particle 3s ease-in-out infinite alternate;
+}
+
+.particles i:nth-child(1) {
+  left: 8%;
+  top: 12%;
+}
+
+.particles i:nth-child(2) {
+  right: 15%;
+  top: 8%;
+  animation-delay: -.5s;
+}
+
+.particles i:nth-child(3) {
+  left: 2%;
+  top: 55%;
+  animation-delay: -1s;
+}
+
+.particles i:nth-child(4) {
+  right: 3%;
+  top: 62%;
+  animation-delay: -1.5s;
+}
+
+.particles i:nth-child(5) {
+  left: 20%;
+  bottom: 4%;
+  animation-delay: -2s;
+}
+
+.particles i:nth-child(6) {
+  right: 24%;
+  bottom: 8%;
+  animation-delay: -2.5s;
+}
+
+.particles i:nth-child(7) {
+  left: 38%;
+  top: 3%;
+  animation-delay: -1.3s;
+}
+
+.particles i:nth-child(8) {
+  right: 5%;
+  top: 35%;
+  animation-delay: -.8s;
+}
+
+@keyframes particle {
+  to {
+    transform: translate(12px,-18px) rotate(135deg) scale(1.6);
+  }
+}
+
+.visualizer>b {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  font-size: .72rem;
+  letter-spacing: .1em;
+}
+
+.game-visual {
+  background: var(--blue);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.game-visual>b {
+  position: relative;
+  z-index: 2;
+  font-size: 3.5rem;
+  line-height: .9;
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 5px 5px 0 var(--ink);
+}
+
+.level {
+  position: absolute;
+  inset: auto 5% 6%;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.level i {
+  width: 18%;
+  height: 80px;
+  border: var(--line);
+  background: var(--lime);
+}
+
+.level i:nth-child(2) {
+  height: 150px;
+}
+
+.level i:nth-child(3) {
+  height: 110px;
+}
+
+.level i:nth-child(4) {
+  height: 210px;
+}
+
+.level i:nth-child(5) {
+  height: 135px;
+}
+
+.pixel {
+  position: absolute;
+  color: var(--coral);
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+.p1 {
+  top: 8%;
+  left: 10%;
+}
+
+.p2 {
+  top: 16%;
+  right: 12%;
+  color: var(--lime);
+}
+
+.p3 {
+  bottom: 25%;
+  left: 20%;
+  color: var(--yellow);
+}
+
+.project-copy::before {
+  content: "";
+  position: absolute;
+  left: max(18px, calc((100vw - var(--max)) / 2 + 18px));
+  top: 12%;
+  bottom: 12%;
+  width: 2px;
+  background: currentColor;
+  opacity: 0.2;
+}
+
+.project:hover .project-copy h3 {
+  transform: translateX(8px);
+  text-shadow: -5px 5px 0 rgba(17, 17, 15, 0.16);
+}
+
+.project-actions a, .project-actions button {
+  position: relative;
+  transition: transform 0.2s var(--ease-out-expo),
+    opacity 0.2s ease;
+}
+
+.project-actions a:hover, .project-actions button:hover {
+  transform: translateX(5px);
+}
+
+.project:hover :is(.scope-visual, .visualizer, .game-visual) {
+  box-shadow: 16px 16px 0 var(--ink);
+  filter: saturate(1.05) contrast(1.02);
+}

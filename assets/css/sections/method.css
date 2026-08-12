@@ -1,0 +1,221 @@
+/* Method and availability section */
+
+.method {
+  border-bottom: var(--line);
+  background: var(--paper);
+}
+
+.method-rail {
+  max-width: var(--max);
+  margin: auto;
+  padding: 0 32px 28px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+}
+
+.method-rail article {
+  position: relative;
+  min-height: 390px;
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: var(--line);
+  background: var(--paper);
+  overflow: hidden;
+  transition: transform .25s ease,box-shadow .25s ease,background .25s ease;
+  isolation: isolate;
+}
+
+.method-rail article+article {
+  border-left: 0;
+}
+
+.method-rail article:nth-child(even) {
+  background: var(--yellow);
+}
+
+.method-rail article::after {
+  content: "";
+  position: absolute;
+  inset: auto -20% -46% 18%;
+  aspect-ratio: 1;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  opacity: .12;
+  transform: scale(.75);
+  transition: transform .35s ease,opacity .35s ease;
+}
+
+.method-rail article:hover,.method-rail article:focus-visible {
+  z-index: 2;
+  transform: translateY(-10px);
+  box-shadow: 8px 8px 0 var(--ink);
+  background: var(--lime);
+}
+
+.method-rail article:hover::after,.method-rail article:focus-visible::after {
+  opacity: .26;
+  transform: scale(1);
+}
+
+.method-rail article>span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: var(--line);
+  border-radius: 50%;
+  font: 700 .68rem "Courier New",monospace;
+  transition: transform .25s ease,background .25s ease;
+}
+
+.method-rail article:hover>span,.method-rail article:focus-visible>span {
+  background: var(--ink);
+  color: var(--paper);
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.method-rail h3 {
+  margin: auto 0 12px;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.method-rail p {
+  margin: 0;
+  font-size: .88rem;
+}
+
+.method-rail ul {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 7px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.method-rail li {
+  padding: 8px 0 0;
+  border-top: 1px solid currentColor;
+  font: 700 .66rem "Courier New",monospace;
+  text-transform: uppercase;
+  transform: translateY(7px);
+  opacity: .72;
+  transition: transform .25s ease,opacity .25s ease;
+}
+
+.method-rail article:hover li,.method-rail article:focus-visible li {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.method-signal {
+  position: relative;
+  max-width: calc(var(--max) - 64px);
+  margin: 0 auto 90px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  border: var(--line);
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.method-signal::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 28%;
+  background: var(--coral);
+  mix-blend-mode: screen;
+  animation: method-sweep 4.8s ease-in-out infinite alternate;
+}
+
+.method-signal span {
+  position: relative;
+  z-index: 1;
+  min-height: 82px;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  border-right: 2px solid var(--paper);
+  font-size: .72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  transition: letter-spacing .2s ease,background .2s ease;
+}
+
+.method-signal span:last-child {
+  border-right: 0;
+}
+
+.method-signal:hover span {
+  letter-spacing: .08em;
+}
+
+.method-signal span:hover {
+  background: var(--lime);
+  color: var(--ink);
+}
+
+@keyframes method-sweep {
+  to {
+    transform: translateX(260%);
+  }
+}
+
+.availability {
+  max-width: calc(var(--max) - 64px);
+  margin: 0 auto 110px;
+  border: var(--line);
+  background: var(--blue);
+  color: #fff;
+}
+
+.availability>div {
+  padding: 22px;
+  border-bottom: 2px solid #fff;
+  font-size: 1.15rem;
+}
+
+.availability .status-dot {
+  background: var(--lime);
+}
+
+.availability ul {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.availability li {
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 22px;
+  font-size: .78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.availability li+li {
+  border-left: 2px solid #fff;
+}
+
+.availability small {
+  font: 700 .62rem "Courier New",monospace;
+  opacity: .75;
+}
+
+.method-rail article h3 {
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+.method-rail article:hover h3, .method-rail article:focus-visible h3 {
+  transform: translateX(5px);
+}

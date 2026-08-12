@@ -1,0 +1,290 @@
+/* Interactive IDEA MACHINE and sequencer */
+
+[data-tilt] {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  transition: transform .18s ease,filter .18s ease;
+}
+
+.instrument {
+  position: relative;
+  width: min(100%,720px);
+  justify-self: end;
+  padding: 18px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: var(--blue);
+  box-shadow: 14px 14px 0 var(--ink);
+  transform: perspective(900px) rotate(1.4deg) rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.2s ease,
+    box-shadow 0.3s var(--ease-out-expo),
+    filter 0.3s ease;
+}
+
+.instrument::before,.instrument::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.instrument::before {
+  top: 10px;
+  left: 10px;
+  z-index: 5;
+}
+
+.instrument::after {
+  right: 10px;
+  bottom: 10px;
+  z-index: 5;
+}
+
+.instrument-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4px 14px;
+  color: #fff;
+  font-size: .68rem;
+  letter-spacing: .1em;
+}
+
+.instrument-head strong {
+  color: var(--yellow);
+}
+
+.screen {
+  min-height: 125px;
+  display: grid;
+  align-content: center;
+  padding: 16px;
+  border: var(--line);
+  border-radius: 4px;
+  background: #151513;
+  color: var(--lime);
+  overflow: hidden;
+}
+
+.wave {
+  height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wave i {
+  flex: 1;
+  height: var(--h,30%);
+  background: var(--lime);
+  animation: wave 1s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.instrument.playing .wave i {
+  animation-play-state: running;
+}
+
+.wave i:nth-child(2n) {
+  --h: 90%;
+  animation-delay: -.2s;
+}
+
+.wave i:nth-child(3n) {
+  --h: 55%;
+  animation-delay: -.45s;
+}
+
+.wave i:nth-child(5n) {
+  --h: 18%;
+  animation-delay: -.7s;
+}
+
+@keyframes wave {
+  to {
+    height: calc(100% - var(--h,30%));
+  }
+}
+
+.screen p {
+  margin: 8px 0 0;
+  font: 700 .7rem/1.2 "Courier New",monospace;
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 15px 0;
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.controls input {
+  width: 100%;
+  accent-color: var(--lime);
+}
+
+.controls select {
+  min-width: 94px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: .68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.transport {
+  border: var(--line);
+  border-radius: 3px;
+  padding: 8px 10px;
+  background: var(--lime);
+  font-size: .68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+.transport.clear {
+  background: var(--paper);
+}
+
+.pad-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+}
+
+.pad {
+  min-width: 0;
+  aspect-ratio: 1.18;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 11px;
+  border: var(--line);
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform .08s,box-shadow .08s;
+}
+
+.pad b {
+  font-size: 1.15rem;
+}
+
+.pad span {
+  font: 700 .62rem "Courier New",monospace;
+}
+
+.pad.coral {
+  background: var(--coral);
+}
+
+.pad.cream {
+  background: var(--paper);
+}
+
+.pad.blue {
+  background: #70a9ff;
+}
+
+.pad.lime {
+  background: var(--lime);
+}
+
+.pad.active,.pad:active {
+  transform: translate(4px,4px);
+  box-shadow: 0 0 0 var(--ink);
+  filter: brightness(1.15);
+}
+
+.instrument-note {
+  margin: 14px 0 0;
+  color: #fff;
+  text-align: right;
+  font: 700 .62rem "Courier New",monospace;
+}
+
+.instrument:hover {
+  box-shadow: 18px 18px 0 var(--ink);
+}
+
+.instrument .screen {
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(201, 240, 74, 0.18);
+}
+
+.screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    rgba(201, 240, 74, 0.28) 3px 4px
+  );
+}
+
+.sequence-strip {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 4px;
+  padding: 10px 0 2px;
+}
+
+.sequence-step {
+  height: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transition: transform 0.12s ease,
+    background 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.sequence-step.filled {
+  background: var(--lime);
+}
+
+.sequence-step.current {
+  transform: scaleY(1.7);
+  background: var(--coral);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.transport.randomize {
+  background: var(--yellow);
+}
+
+.transport:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.pad:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
